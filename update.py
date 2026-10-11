@@ -27,7 +27,7 @@ def load():
 def team_name(t):
     return t.get('name') or (t.get('location','')+' '+t.get('nickname','')).strip() or f"Team {t['id']}"
 
-def roster(t):
+def roster(t, current_week):
     arr=[]
     for ent in (t.get('roster') or {}).get('entries',[]):
         pe=ent.get('playerPoolEntry') or {}
@@ -36,7 +36,9 @@ def roster(t):
         stats=p.get('stats') or []
         proj=[]
         for s in stats:
-            if s.get('statSourceId')==1 and s.get('appliedTotal') is not None:
+            if (s.get('statSourceId') == 1
+        and s.get('scoringPeriodId') == current_week
+        and s.get('appliedTotal') is not None):
                 proj.append((s.get('scoringPeriodId',0),float(s['appliedTotal'])))
         arr.append({'name':p.get('fullName','Unknown'),'injury':p.get('injuryStatus','ACTIVE'),
                     'slot':ent.get('lineupSlotId'), 'projected':round(max(proj,key=lambda x:x[0])[1],1) if proj else None})
@@ -73,7 +75,7 @@ def run(d):
         if wins[i]+losses[i]==0 and rec.get('gamesPlayed',0)>0:
             wins[i]=int(rec.get('wins',0));losses[i]=int(rec.get('losses',0));pf[i]=float(rec.get('pointsFor',0));pa[i]=float(rec.get('pointsAgainst',0))
     names=[team_name(t) for t in teams]
-    roster_data=[roster(t) for t in teams]
+    roster_data=[roster(t, current) for t in teams]
     # Blend observed scoring with league mean, and active-player projections when available.
     games=np.maximum(1,wins+losses)
     avg=np.where((wins+losses)>0,pf/games,120)
