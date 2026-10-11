@@ -85,9 +85,36 @@ def run(d):
         past=sorted(history[ids[i]],reverse=True)
         recent=np.average([v for _,v in past[:3]],weights=[0.55,0.30,0.15][:len(past)]) if past else avg[i]
         active_proj=sorted([p['projected'] for p in roster_data[i] if p['projected'] is not None and p['injury'] not in ('OUT','INJURY_RESERVE') and p['slot'] not in (20,21)],reverse=True)
-        roster_est=sum(active_proj[:9]) if len(active_proj)>=7 else None
-        base=0.50*avg[i]+0.25*recent+0.25*league_mean
-        strength[i]=0.72*base+0.28*roster_est if roster_est and 70<roster_est<220 else base
+                # Use only eligible starting lineup positions.
+        # ESPN slot IDs: 0 QB, 2 RB, 4 WR, 6 TE,
+        # 23 FLEX, 16 D/ST, 17 K.
+        starter_slots = {0, 2, 4, 6, 23, 16, 17}
+
+        starter_projections = [
+            p['projected']
+            for p in roster_data[i]
+            if p['projected'] is not None
+            and p['slot'] in starter_slots
+            and p['injury'] not in ('OUT', 'INJURY_RESERVE')
+        ]
+
+        roster_est = (
+            sum(starter_projections)
+            if len(starter_projections) == 9
+            else None
+        )
+
+        base = (
+            0.50 * avg[i]
+            + 0.25 * recent
+            + 0.25 * league_mean
+        )
+
+        strength[i] = (
+            0.72 * base + 0.28 * roster_est
+            if roster_est is not None and 70 < roster_est < 220
+            else base
+        )
     # Missing future matchups? Keep the site operational, but don't pretend simulations use the full schedule.
     future_weeks={w for w,_,_ in future}; complete_schedule=all(sum(1 for x in future if x[0]==w)==5 for w in range(current,reg+1))
     if not complete_schedule:
