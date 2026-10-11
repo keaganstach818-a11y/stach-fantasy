@@ -1,23 +1,1006 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#06101d"><title>Stach Fantasy Football HQ</title><style>
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06101d">
+<title>Stach Fantasy Football HQ</title>
+
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
-:root{--bg:#07101e;--panel:#0d1b2d;--border:#25445c;--text:#f3f7ff;--muted:#93a8bf;--gold:#f4c567;--cyan:#49d7e8}*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 50% -10%,#174365 0%,#07101e 48%,#040910 100%);font-family:Inter,system-ui,sans-serif;min-height:100vh}body:before{content:'';position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 99px,#ffffff04 100px);opacity:.35}.wrap{max-width:1510px;margin:auto;padding:24px 20px 80px}header{text-align:center;padding:28px 0 24px;position:relative}h1,h2,h3,.big,.metric{font-family:'Barlow Condensed',Impact,sans-serif;letter-spacing:.035em}h1{font-size:clamp(42px,7vw,88px);line-height:.92;margin:0;text-shadow:0 3px 0 #334353,0 12px 25px #000}header .sub{font-family:'Barlow Condensed';font-size:clamp(20px,3vw,33px);color:var(--gold);font-weight:800;letter-spacing:.12em;margin:8px 0}header p{font-size:12px;color:var(--muted);letter-spacing:.09em}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 20px}.pill{border:1px solid #315875;background:#0d2339;padding:10px 14px;border-radius:999px;color:#cfe7f7;font-size:12px}.pill b{color:#fff}.btn{border:1px solid #397b99;background:#0f3149;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.btn:hover{background:#195475}.layout{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px}.card{background:linear-gradient(145deg,#10253aeb,#071522f7);border:1px solid var(--border);border-radius:15px;box-shadow:0 12px 28px #0004;overflow:hidden}.card h2{font-size:25px;margin:0;padding:13px 17px;border-bottom:1px solid #25445c;background:#102b40;text-transform:uppercase}.card .inner{padding:17px}.span2{grid-column:span 2}.span3{grid-column:span 3}.hero{border-color:#ae8543;background:linear-gradient(110deg,#342912,#111f2b 65%);display:flex;align-items:center;justify-content:space-between;padding:24px;gap:20px}.hero .big{font-size:clamp(46px,5vw,76px);font-weight:900;line-height:1}.hero .metric{font-size:clamp(45px,5vw,72px);color:var(--gold);font-weight:900}.hero .trophy{font-size:72px}.small{font-size:12px;color:var(--muted);line-height:1.5}.rowbar{display:grid;grid-template-columns:104px minmax(0,1fr) 52px;align-items:center;gap:10px;margin:12px 0;font-size:13px}.track{height:13px;background:#1d3445;border-radius:3px;overflow:hidden}.fill{height:100%;border-radius:3px;min-width:2px}.pct{text-align:right;font-weight:800}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}th{text-align:left;color:#8fb0c7;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:#10283b}th,td{padding:12px 11px;border-bottom:1px solid #23394b}tr:hover td{background:#18324b55}td strong{color:#fff}td.gold{color:var(--gold);font-weight:800}.teamname{font-weight:800}.muted{color:var(--muted)}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:17px;background:#0b1e2d;border:1px solid #29445b;border-radius:12px}.stat .num{font-family:'Barlow Condensed';font-size:34px;font-weight:900;color:#fff}.stat .lbl{font-size:11px;color:#a7bbcb;text-transform:uppercase;letter-spacing:.07em}.bracket{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:18px}.round h3{color:#d6a95e;margin:0 0 12px;font-size:20px}.match{border:1px solid #355571;border-radius:10px;padding:12px;margin-bottom:12px;background:#0b2133}.match div{display:flex;justify-content:space-between;padding:6px 0}.match div+div{border-top:1px solid #294257}.winner{color:#f2c36d;font-weight:800}.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.insight{border-left:3px solid #4bcbd9;background:#10263a;padding:15px;border-radius:8px}.insight b{display:block;margin-bottom:8px}.rostergrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.rosterbox{border:1px solid #29465a;background:#0b2030;border-radius:10px;padding:14px}.rosterbox h3{margin:0 0 8px;font-size:21px}.player{font-size:12px;color:#c5d7e5;padding:5px 0;border-bottom:1px solid #223747}.player:last-child{border:0}.status{float:right;color:#e6a367;font-size:10px}.note{border:1px solid #456076;background:#13293a;border-radius:10px;padding:12px;font-size:12px;color:#b6c9d8;line-height:1.65;margin-top:15px}a{color:#73d8e8}footer{text-align:center;color:#7693a8;font-size:11px;margin-top:26px}#error{display:none;background:#402324;border:1px solid #b96d6d;color:#ffd4d4;padding:12px;border-radius:10px;margin-bottom:16px}@media(max-width:1100px){.layout{grid-template-columns:1fr 1fr}.span3{grid-column:span 2}.hero{grid-column:span 2}}@media(max-width:720px){.wrap{padding:12px 12px 50px}.layout{grid-template-columns:1fr}.span2,.span3,.hero{grid-column:span 1}.grid4{grid-template-columns:repeat(2,1fr)}.insights,.rostergrid{grid-template-columns:1fr}.bracket{grid-template-columns:1fr}.rowbar{grid-template-columns:96px 1fr 48px}.hero .trophy{font-size:46px}header{padding-top:22px}h1{font-size:48px}}
-</style></head><body><main class="wrap"><header><h1>STACH FANTASY FOOTBALL</h1><div class="sub">2026 CHAMPIONSHIP PREDICTIONS</div><p>THE LEAGUE'S COMMAND CENTER · ALL 10 TEAMS · UPDATED TUESDAYS</p></header><div class="top"><div class="pill" id="mode">● Loading dashboard…</div><div class="pill" id="updated">League ID 2108436489</div><div><button class="btn" id="refresh">↻ Refresh</button> <a class="btn" style="display:inline-block;text-decoration:none" href="https://fantasy.espn.com/football/league?leagueId=2108436489" target="_blank" rel="noopener">Open ESPN ↗</a></div></div><div id="error"></div><section class="layout"><div class="card hero span2"><div><div class="small" style="color:#e6c785;font-weight:800">🏆 MOST LIKELY CHAMPION</div><div class="big" id="champName">KEAGAN</div><div class="small">Projected chance to win the league</div><div class="metric" id="champPct">—</div></div><div class="trophy">🏆</div></div><div class="card"><h2>League format</h2><div class="inner grid4" style="grid-template-columns:1fr 1fr"><div class="stat"><div class="num">10</div><div class="lbl">Teams</div></div><div class="stat"><div class="num">6</div><div class="lbl">Playoff spots</div></div><div class="stat"><div class="num">2</div><div class="lbl">First-round byes</div></div><div class="stat"><div class="num" id="through">4</div><div class="lbl">Weeks completed</div></div></div></div><div class="card span2"><h2>League standings & projections</h2><div class="tablewrap"><table><thead><tr><th>#</th><th>Team</th><th>Record</th><th>PPG</th><th>Projected W</th><th>Playoffs</th><th>Title</th></tr></thead><tbody id="standings"></tbody></table></div></div><div class="card"><h2>Championship odds</h2><div class="inner" id="champBars"></div></div><div class="card"><h2>Playoff probabilities</h2><div class="inner" id="playoffBars"></div></div><div class="card"><h2>Top-two bye chances</h2><div class="inner" id="byeBars"></div></div><div class="card"><h2>Power rankings</h2><div class="inner" id="power"></div></div><div class="card span3"><h2>Projected 6-team playoff bracket</h2><div class="bracket" id="bracket"></div></div><div class="card span3"><h2>League insights</h2><div class="inner insights" id="insights"></div></div><div class="card span3"><h2>Roster report · starters & bench</h2><div class="inner"><p class="small">Players and injury tags come from the latest ESPN snapshot when the automatic updater is connected.</p><div class="rostergrid" id="rosters"></div></div></div></section><div class="note" id="disclaimer"></div><footer>STACH FANTASY FOOTBALL HQ · Independent fan project · Not affiliated with ESPN or the NFL</footer></main><script>
-const fallback={mode:'demo',season:2026,throughWeek:4,simulations:0,teams:[
-{name:'Keagan',wins:4,losses:0,ppg:148.8,projectedWins:10,playoffPct:98.9,byePct:67.4,champPct:38.2,roster:['Jayden Daniels','Ashton Jeanty','Rhamondre Stevenson','Chris Olave','Matthew Golden','Tyler Warren','Jaxon Smith-Njigba','Rico Dowdle','Chuba Hubbard','Tetairoa McMillan','Khalil Shakir','Courtland Sutton']},
-{name:'Theo',wins:4,losses:0,ppg:122,projectedWins:9,playoffPct:90.2,byePct:15.0,champPct:8.5,roster:['Josh Allen','Jahmyr Gibbs','Emeka Egbuka','Ladd McConkey','George Kittle','Stefon Diggs','Jordan Addison','Romeo Doubs','Aaron Jones','Bo Nix']},
-{name:'Messi Mbappes',wins:3,losses:1,ppg:131.3,projectedWins:9,playoffPct:91.5,byePct:12.1,champPct:18.3,roster:['Jacoby Brissett','Bijan Robinson','Kyren Williams','Nico Collins','Drake London','Dallas Goedert','Michael Wilson','Terry McLaurin','Tony Pollard','Jaylen Warren']},
-{name:'Phrankie',wins:2,losses:2,ppg:124,projectedWins:8,playoffPct:89.5,byePct:4.8,champPct:18.6,roster:['Drake Maye','James Cook','Javonte Williams','Amon-Ra St. Brown','Garrett Wilson','Sam LaPorta','Emanuel Wilson','Braelon Allen','Luther Burden III','Travis Kelce']},
-{name:'Bruce',wins:2,losses:2,ppg:129,projectedWins:6,playoffPct:53.2,byePct:.2,champPct:4.2,roster:['Marcus Mariota','Derrick Henry','Bhayshul Tuten','Davante Adams','Ja’Marr Chase','Trey McBride','Mike Evans','Breece Hall','Jerry Jeudy','Jameson Williams']},
-{name:'Michael',wins:2,losses:2,ppg:96.9,projectedWins:7,playoffPct:57.1,byePct:.1,champPct:4.1,roster:['Jared Goff','Bucky Irving','D’Andre Swift','Justin Jefferson','Parker Washington','Juwan Johnson','Josh Downs','Saquon Barkley','Lamar Jackson','Marvin Harrison Jr.']},
-{name:'Patrick',wins:2,losses:2,ppg:127.2,projectedWins:6,playoffPct:36.9,byePct:.1,champPct:2.1,roster:['Brock Purdy','TreVeyon Henderson','Cam Skattebo','CeeDee Lamb','DK Metcalf','Harold Fannin Jr.','David Montgomery','Mark Andrews','Patrick Mahomes','Kenneth Walker III']},
-{name:'Myles',wins:1,losses:3,ppg:100.8,projectedWins:7,playoffPct:63.2,byePct:.3,champPct:5.4,roster:['Joe Burrow','Chase Brown','Quinshon Judkins','Puka Nacua','Christian Watson','T.J. Hockenson','George Pickens','Chris Godwin','RJ Harvey','Matthew Stafford']},
-{name:'Kevin',wins:0,losses:4,ppg:115.6,projectedWins:5,playoffPct:13.2,byePct:0,champPct:.4,roster:['Trevor Lawrence','Alvin Kamara','Christian McCaffrey','Zay Flowers','Deebo Samuel','Brock Bowers','Jaylen Waddle','Jalen Hurts','Rome Odunze','Brian Thomas Jr.']},
-{name:'Greg',wins:0,losses:4,ppg:120,projectedWins:4,playoffPct:6.3,byePct:0,champPct:.2,roster:['Dak Prescott','Omarion Hampton','Jonathan Taylor','Tee Higgins','Chimere Dike','Isaiah Likely','Malik Nabers','Rashee Rice','Wan’Dale Robinson','Devaughn Vele']}
-]};
-const palette=['#bb86ff','#4db4ff','#35e5d9','#e9ad5d','#fb6472','#61ddae','#e49ce9','#7dbdff','#ff8bc2','#c3e969'];
-const $=id=>document.getElementById(id);const fmt=n=>Number(n||0).toFixed(1)+'%';const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function teamColor(t,arr){return palette[Math.max(0,arr.findIndex(x=>x.id===t.id||x.name===t.name))%palette.length]}
-function bars(arr,key,max){return arr.map(t=>`<div class="rowbar"><span style="color:${teamColor(t,arr)};font-weight:800">${safe(t.name)}</span><div class="track"><div class="fill" style="width:${Math.min(100,t[key]/max*100)}%;background:${teamColor(t,arr)}"></div></div><span class="pct">${fmt(t[key])}</span></div>`).join('')}
-function render(data){const ts=data.teams||[];if(!ts.length)return;const rank=[...ts].sort((a,b)=>b.wins-a.wins||b.pointsFor-a.pointsFor||b.ppg-a.ppg);const champs=[...ts].sort((a,b)=>b.champPct-a.champPct);const play=[...ts].sort((a,b)=>b.playoffPct-a.playoffPct);const bye=[...ts].sort((a,b)=>b.byePct-a.byePct);const seed=data.projectedSeeds?data.projectedSeeds.map(id=>ts.find(t=>t.id===id)).filter(Boolean):[...ts].sort((a,b)=>b.projectedWins-a.projectedWins||b.ppg-a.ppg).slice(0,6);const leader=champs[0];$('champName').textContent=leader.name.toUpperCase();$('champPct').textContent=fmt(leader.champPct);$('through').textContent=data.throughWeek??'—';$('mode').innerHTML=data.mode==='live'?'<b style="color:#6cf4b7">● ESPN-CONNECTED SNAPSHOT</b> · Predictions updated weekly':'<b style="color:#f7ce79">● PREVIEW MODE</b> · Awaiting first ESPN sync';$('updated').textContent=data.updatedAt?'Last data update: '+new Date(data.updatedAt).toLocaleString():'2026 season · League 2108436489';$('standings').innerHTML=rank.map((t,i)=>`<tr><td>${i+1}</td><td class="teamname" style="color:${teamColor(t,ts)}">${safe(t.name)}</td><td>${t.wins}–${t.losses}</td><td>${Number(t.ppg||0).toFixed(1)}</td><td>${Number(t.projectedWins||0).toFixed(1)}</td><td>${fmt(t.playoffPct)}</td><td class="gold">${fmt(t.champPct)}</td></tr>`).join('');$('champBars').innerHTML=bars(champs,'champPct',Math.max(40,champs[0].champPct));$('playoffBars').innerHTML=bars(play,'playoffPct',100);$('byeBars').innerHTML=bars(bye,'byePct',100);$('power').innerHTML=[...ts].sort((a,b)=>(b.strength??b.ppg)-(a.strength??a.ppg)).map((t,i)=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #203a50"><span><b style="color:${teamColor(t,ts)}">${i+1}.</b> ${safe(t.name)}</span><b>${Number(t.strength??t.ppg).toFixed(1)}</b></div>`).join('');const label=t=>safe(t?.name||'TBD');const bracket=[`<div class="round"><h3>WILD CARD · WEEK 15</h3><div class="match"><div><span>#3 ${label(seed[2])}</span><span>vs</span></div><div><span>#6 ${label(seed[5])}</span></div></div><div class="match"><div><span>#4 ${label(seed[3])}</span><span>vs</span></div><div><span>#5 ${label(seed[4])}</span></div></div></div>`,`<div class="round"><h3>SEMIFINALS · WEEK 16</h3><div class="match"><div class="winner"><span>#1 ${label(seed[0])}</span><span>BYE</span></div><div><span>vs Wild Card 4/5 winner</span></div></div><div class="match"><div class="winner"><span>#2 ${label(seed[1])}</span><span>BYE</span></div><div><span>vs Wild Card 3/6 winner</span></div></div></div>`,`<div class="round"><h3>CHAMPIONSHIP · WEEK 17</h3><div class="match"><div class="winner">🏆 ${label(leader)}</div><div><span>Most likely champion</span><b>${fmt(leader.champPct)}</b></div></div><p class="small">Bracket is based on projected seeds; actual playoff results will vary.</p></div>`];$('bracket').innerHTML=bracket.join('');const underdog=ts.filter(t=>t.wins<=1).sort((a,b)=>b.playoffPct-a.playoffPct)[0];const deep=ts.filter(t=>t.name!==leader.name).sort((a,b)=>b.champPct-a.champPct)[0];$('insights').innerHTML=[['🏆 Championship favorite',`${leader.name} leads with ${fmt(leader.champPct)} title odds.`],['⚡ Biggest challenger',`${deep.name} is next at ${fmt(deep.champPct)}.`],['📈 Comeback watch',`${underdog.name} has a ${fmt(underdog.playoffPct)} playoff chance despite a ${underdog.wins}–${underdog.losses} start.`],['🎟️ First-round bye',`${bye[0].name} leads the bye race at ${fmt(bye[0].byePct)}.`],['📊 Highest scoring',`${[...ts].sort((a,b)=>b.ppg-a.ppg)[0].name} leads in points per game.`],['🔍 Simulation model',data.mode==='live'?`${(data.simulations||0).toLocaleString()} season simulations with actual ESPN matchups.`:'Preview percentages are illustrative estimates, not a live simulation.']].map(([h,v])=>`<div class="insight"><b>${safe(h)}</b><span class="small">${safe(v)}</span></div>`).join('');$('rosters').innerHTML=rank.map(t=>`<div class="rosterbox"><h3 style="color:${teamColor(t,ts)}">${safe(t.name)} <span class="small">${t.wins}–${t.losses}</span></h3>${(t.roster||[]).map(p=>typeof p==='string'?`<div class="player">${safe(p)}</div>`:`<div class="player">${safe(p.name)} ${p.injury&&p.injury!=='ACTIVE'?`<span class="status">${safe(p.injury)}</span>`:''}</div>`).join('')||'<span class="small">Roster not available</span>'}</div>`).join('');$('disclaimer').innerHTML=data.mode==='live'?`<b>How predictions work:</b> ${safe(data.method||'Monte Carlo projections based on ESPN records, rosters and matchups.')} ESPN data is refreshed by the scheduled GitHub Actions workflow on Tuesdays. Percentages are estimates, not guarantees. No future matchups are displayed.`:`<b>Preview only:</b> This dashboard currently shows previously discussed estimates and sample roster summaries. It is <b>not connected to ESPN yet</b>, and the probabilities are <b>not verified live calculations</b>. Once the updater successfully fetches ESPN data, it replaces this preview with newly simulated probabilities and actual rosters. The updater must be deployed and enabled for automatic Tuesday refreshes.`;}
-async function load(){try{const r=await fetch('data/dashboard.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('No ESPN snapshot published yet');const d=await r.json();if(d.mode!=='live'||!Array.isArray(d.teams))throw Error('Invalid ESPN snapshot');render(d)}catch(e){render(fallback)}}$('refresh').onclick=load;load();
-</script></body></html>
+
+:root {
+  --bg:#07101e;
+  --panel:#0d1b2d;
+  --border:#25445c;
+  --text:#f3f7ff;
+  --muted:#93a8bf;
+  --gold:#f4c567;
+  --cyan:#49d7e8;
+  --green:#6cf4b7;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  color:var(--text);
+  background:radial-gradient(
+    ellipse at 50% -10%,
+    #174365 0%,#07101e 48%,#040910 100%
+  );
+  font-family:Inter,system-ui,sans-serif;
+  min-height:100vh;
+}
+
+body:before {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    90deg,transparent 0 99px,#ffffff04 100px
+  );
+  opacity:.35;
+}
+
+.wrap {
+  max-width:1510px;
+  margin:auto;
+  padding:24px 20px 80px;
+}
+
+header {
+  text-align:center;
+  padding:28px 0 24px;
+}
+
+h1,h2,h3,.big,.metric {
+  font-family:"Barlow Condensed",Impact,sans-serif;
+  letter-spacing:.035em;
+}
+
+h1 {
+  font-size:clamp(42px,7vw,88px);
+  line-height:.92;
+  margin:0;
+  text-shadow:0 3px 0 #334353,0 12px 25px #000;
+}
+
+header .sub {
+  font-family:"Barlow Condensed";
+  font-size:clamp(20px,3vw,33px);
+  color:var(--gold);
+  font-weight:800;
+  letter-spacing:.12em;
+  margin:8px 0;
+}
+
+header p {
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.09em;
+}
+
+.top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.pill {
+  border:1px solid #315875;
+  background:#0d2339;
+  padding:10px 14px;
+  border-radius:999px;
+  color:#cfe7f7;
+  font-size:12px;
+}
+
+.btn {
+  border:1px solid #397b99;
+  background:#0f3149;
+  color:white;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.btn:hover {background:#195475}
+
+.layout {
+  display:grid;
+  grid-template-columns:1.35fr 1fr 1fr;
+  gap:14px;
+}
+
+.card {
+  background:linear-gradient(145deg,#10253aeb,#071522f7);
+  border:1px solid var(--border);
+  border-radius:15px;
+  box-shadow:0 12px 28px #0004;
+  overflow:hidden;
+}
+
+.card h2 {
+  font-size:25px;
+  margin:0;
+  padding:13px 17px;
+  border-bottom:1px solid #25445c;
+  background:#102b40;
+  text-transform:uppercase;
+}
+
+.inner {padding:17px}
+.span2 {grid-column:span 2}
+.span3 {grid-column:span 3}
+
+.hero {
+  border-color:#ae8543;
+  background:linear-gradient(110deg,#342912,#111f2b 65%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:24px;
+  gap:20px;
+}
+
+.hero .big {
+  font-size:clamp(46px,5vw,76px);
+  font-weight:900;
+  line-height:1;
+}
+
+.hero .metric {
+  font-size:clamp(45px,5vw,72px);
+  color:var(--gold);
+  font-weight:900;
+}
+
+.hero .trophy {font-size:72px}
+
+.small {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.rowbar {
+  display:grid;
+  grid-template-columns:104px minmax(0,1fr) 52px;
+  align-items:center;
+  gap:10px;
+  margin:12px 0;
+  font-size:13px;
+}
+
+.track {
+  height:13px;
+  background:#1d3445;
+  border-radius:3px;
+  overflow:hidden;
+}
+
+.fill {
+  height:100%;
+  border-radius:3px;
+  min-width:2px;
+}
+
+.pct {
+  text-align:right;
+  font-weight:800;
+}
+
+.tablewrap {overflow:auto}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  white-space:nowrap;
+  font-size:13px;
+}
+
+th {
+  text-align:left;
+  color:#8fb0c7;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:#10283b;
+}
+
+th,td {
+  padding:12px 11px;
+  border-bottom:1px solid #23394b;
+}
+
+tr:hover td {background:#18324b55}
+td.gold {color:var(--gold);font-weight:800}
+.teamname {font-weight:800}
+
+.grid4 {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat {
+  padding:17px;
+  background:#0b1e2d;
+  border:1px solid #29445b;
+  border-radius:12px;
+}
+
+.stat .num {
+  font-family:"Barlow Condensed";
+  font-size:34px;
+  font-weight:900;
+}
+
+.stat .lbl {
+  font-size:11px;
+  color:#a7bbcb;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+
+.bracket {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:14px;
+  padding:18px;
+}
+
+.round h3 {
+  color:#d6a95e;
+  margin:0 0 12px;
+  font-size:20px;
+}
+
+.match {
+  border:1px solid #355571;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:12px;
+  background:#0b2133;
+}
+
+.match div {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:6px 0;
+}
+
+.match div+div {
+  border-top:1px solid #294257;
+}
+
+.winner {
+  color:#f2c36d;
+  font-weight:800;
+}
+
+.insights {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.insight {
+  border-left:3px solid #4bcbd9;
+  background:#10263a;
+  padding:15px;
+  border-radius:8px;
+}
+
+.insight b {
+  display:block;
+  margin-bottom:8px;
+}
+
+.rostergrid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.rosterbox {
+  border:1px solid #29465a;
+  background:#0b2030;
+  border-radius:10px;
+  padding:14px;
+}
+
+.rosterbox h3 {
+  margin:0 0 8px;
+  font-size:21px;
+}
+
+.player {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  font-size:12px;
+  color:#c5d7e5;
+  padding:5px 0;
+  border-bottom:1px solid #223747;
+}
+
+.player:last-child {border:0}
+
+.status {
+  color:#e6a367;
+  font-size:10px;
+}
+
+.starter {color:#6cf4b7}
+.bench {color:#93a8bf}
+
+.note {
+  border:1px solid #456076;
+  background:#13293a;
+  border-radius:10px;
+  padding:12px;
+  font-size:12px;
+  color:#b6c9d8;
+  line-height:1.65;
+  margin-top:15px;
+}
+
+.warning {
+  display:none;
+  background:#402c19;
+  border:1px solid #b88a45;
+  color:#ffe4b6;
+  padding:13px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.warning.error {
+  background:#402324;
+  border-color:#b96d6d;
+  color:#ffd4d4;
+}
+
+footer {
+  text-align:center;
+  color:#7693a8;
+  font-size:11px;
+  margin-top:26px;
+}
+
+@media(max-width:1100px) {
+  .layout {grid-template-columns:1fr 1fr}
+  .span3 {grid-column:span 2}
+  .hero {grid-column:span 2}
+}
+
+@media(max-width:720px) {
+  .wrap {padding:12px 12px 50px}
+  .layout {grid-template-columns:1fr}
+  .span2,.span3,.hero {grid-column:span 1}
+  .grid4 {grid-template-columns:repeat(2,1fr)}
+  .insights,.rostergrid {grid-template-columns:1fr}
+  .bracket {grid-template-columns:1fr}
+  .rowbar {grid-template-columns:96px 1fr 48px}
+  .hero .trophy {font-size:46px}
+  h1 {font-size:48px}
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+<header>
+  <h1>STACH FANTASY FOOTBALL</h1>
+  <div class="sub">2026 CHAMPIONSHIP PREDICTIONS</div>
+  <p>THE LEAGUE'S COMMAND CENTER · ALL 10 TEAMS · UPDATED TUESDAYS</p>
+</header>
+
+<div class="top">
+  <div class="pill" id="mode">● Loading ESPN data…</div>
+  <div class="pill" id="updated">League ID 2108436489</div>
+  <div>
+    <button class="btn" id="refresh">↻ Refresh</button>
+    <a class="btn"
+       href="https://fantasy.espn.com/football/league?leagueId=2108436489"
+       target="_blank" rel="noopener">
+       Open ESPN ↗
+    </a>
+  </div>
+</div>
+
+<div id="error" class="warning" role="alert"></div>
+
+<section class="layout">
+
+  <div class="card hero span2">
+    <div>
+      <div class="small" style="color:#e6c785;font-weight:800">
+        🏆 MOST LIKELY CHAMPION
+      </div>
+      <div class="big" id="champName">—</div>
+      <div class="small">Projected chance to win the league</div>
+      <div class="metric" id="champPct">—</div>
+    </div>
+    <div class="trophy">🏆</div>
+  </div>
+
+  <div class="card">
+    <h2>League format</h2>
+    <div class="inner grid4" style="grid-template-columns:1fr 1fr">
+      <div class="stat">
+        <div class="num">10</div>
+        <div class="lbl">Teams</div>
+      </div>
+      <div class="stat">
+        <div class="num">6</div>
+        <div class="lbl">Playoff spots</div>
+      </div>
+      <div class="stat">
+        <div class="num">2</div>
+        <div class="lbl">First-round byes</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="through">—</div>
+        <div class="lbl">Weeks completed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card span2">
+    <h2>League standings & projections</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Record</th>
+            <th>PPG</th>
+            <th>Projected W</th>
+            <th>Playoffs</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody id="standings"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Championship odds</h2>
+    <div class="inner" id="champBars"></div>
+  </div>
+
+  <div class="card">
+    <h2>Playoff probabilities</h2>
+    <div class="inner" id="playoffBars"></div>
+  </div>
+
+  <div class="card">
+    <h2>Top-two bye chances</h2>
+    <div class="inner" id="byeBars"></div>
+  </div>
+
+  <div class="card">
+    <h2>Power rankings</h2>
+    <div class="inner" id="power"></div>
+  </div>
+
+  <div class="card span3">
+    <h2>Projected 6-team playoff bracket</h2>
+    <div class="bracket" id="bracket"></div>
+  </div>
+
+  <div class="card span3">
+    <h2>League insights</h2>
+    <div class="inner insights" id="insights"></div>
+  </div>
+
+  <div class="card span3">
+    <h2>Roster report · starters & bench</h2>
+    <div class="inner">
+      <p class="small">
+        Rosters and injury designations reflect the latest
+        published ESPN snapshot. Green labels indicate starters.
+      </p>
+      <div class="rostergrid" id="rosters"></div>
+    </div>
+  </div>
+
+</section>
+
+<div class="note" id="disclaimer">
+  Loading prediction methodology…
+</div>
+
+<footer>
+  STACH FANTASY FOOTBALL HQ · Independent fan project ·
+  Not affiliated with ESPN or the NFL
+</footer>
+
+</main>
+
+<script>
+"use strict";
+
+const palette = [
+  "#bb86ff","#4db4ff","#35e5d9","#e9ad5d","#fb6472",
+  "#61ddae","#e49ce9","#7dbdff","#ff8bc2","#c3e969"
+];
+
+const starterSlots = new Set([0,2,4,6,23,16,17]);
+
+const $ = id => document.getElementById(id);
+
+const safe = value => String(value ?? "").replace(
+  /[&<>"']/g,
+  c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[c]
+);
+
+const fmt = n => Number(n || 0).toFixed(1) + "%";
+
+const num = (n,d=1) =>
+  Number(n || 0).toFixed(d);
+
+function teamColor(team,teams) {
+  const i = teams.findIndex(t => t.id === team.id);
+  return palette[(i < 0 ? 0 : i) % palette.length];
+}
+
+function record(team) {
+  const w = Number(team.wins || 0);
+  const l = Number(team.losses || 0);
+  const t = Number(team.ties || 0);
+  return t ? `${w}–${l}–${t}` : `${w}–${l}`;
+}
+
+function winEquivalent(team) {
+  return Number(team.wins || 0)
+    + Number(team.ties || 0) / 2;
+}
+
+function showWarning(message,isError=false) {
+  const el = $("error");
+  el.textContent = message;
+  el.className = isError ? "warning error" : "warning";
+  el.style.display = "block";
+}
+
+function clearWarning() {
+  $("error").style.display = "none";
+}
+
+function bars(teams,key,maxValue) {
+  return teams.map(team => {
+    const value = Number(team[key] || 0);
+    const width = Math.max(
+      0,
+      Math.min(100,value / maxValue * 100)
+    );
+    const color = teamColor(team,teams);
+
+    return `
+      <div class="rowbar">
+        <span style="color:${color};font-weight:800">
+          ${safe(team.name)}
+        </span>
+        <div class="track">
+          <div class="fill"
+               style="width:${width}%;background:${color}">
+          </div>
+        </div>
+        <span class="pct">${fmt(value)}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function render(data) {
+  const teams = data.teams;
+
+  if (!Array.isArray(teams) || teams.length !== 10) {
+    throw Error("Expected exactly 10 ESPN teams.");
+  }
+
+  const standings = [...teams].sort((a,b) =>
+    winEquivalent(b)-winEquivalent(a)
+    || Number(b.pointsFor || 0)-Number(a.pointsFor || 0)
+  );
+
+  const champions = [...teams].sort(
+    (a,b) => b.champPct-a.champPct
+  );
+
+  const playoffOrder = [...teams].sort(
+    (a,b) => b.playoffPct-a.playoffPct
+  );
+
+  const byeOrder = [...teams].sort(
+    (a,b) => b.byePct-a.byePct
+  );
+
+  const leader = champions[0];
+
+  $("champName").textContent = leader.name.toUpperCase();
+  $("champPct").textContent = fmt(leader.champPct);
+  $("through").textContent = data.throughWeek ?? "—";
+
+  $("mode").innerHTML =
+    '<b style="color:#6cf4b7">● ESPN-CONNECTED SNAPSHOT</b>'
+    + ' · ' + Number(data.simulations || 0).toLocaleString()
+    + ' simulations';
+
+  const updatedDate = new Date(data.updatedAt);
+
+  $("updated").textContent =
+    "Last data update: " + updatedDate.toLocaleString();
+
+  // Current standings use ESPN-derived records.
+  $("standings").innerHTML = standings.map((team,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td class="teamname"
+          style="color:${teamColor(team,teams)}">
+        ${safe(team.name)}
+      </td>
+      <td>${record(team)}</td>
+      <td>${num(team.ppg)}</td>
+      <td>${num(team.projectedWins)}</td>
+      <td>${fmt(team.playoffPct)}</td>
+      <td class="gold">${fmt(team.champPct)}</td>
+    </tr>
+  `).join("");
+
+  $("champBars").innerHTML = bars(
+    champions,
+    "champPct",
+    Math.max(40,champions[0].champPct)
+  );
+
+  $("playoffBars").innerHTML = bars(
+    playoffOrder,"playoffPct",100
+  );
+
+  $("byeBars").innerHTML = bars(
+    byeOrder,"byePct",100
+  );
+
+  // Power rankings use the model's estimated scoring strength.
+  const power = [...teams].sort(
+    (a,b) => Number(b.strength)-Number(a.strength)
+  );
+
+  $("power").innerHTML = power.map((team,i) => `
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:9px 0;
+      border-bottom:1px solid #203a50
+    ">
+      <span>
+        <b style="color:${teamColor(team,teams)}">
+          ${i+1}.
+        </b>
+        ${safe(team.name)}
+      </span>
+      <b>${num(team.strength)}</b>
+    </div>
+  `).join("");
+
+  // Use the projected seeds supplied by the simulation.
+  const seedIds = data.projectedSeeds;
+
+  if (
+    !Array.isArray(seedIds)
+    || seedIds.length !== 6
+    || new Set(seedIds).size !== 6
+  ) {
+    throw Error("Invalid projected playoff seeds.");
+  }
+
+  const seeds = seedIds.map(
+    id => teams.find(t => String(t.id) === String(id))
+  );
+
+  if (seeds.some(t => !t)) {
+    throw Error("Projected seed does not match an ESPN team.");
+  }
+
+  const label = team => safe(team?.name || "TBD");
+
+  // Fixed six-team bracket: no playoff reseeding.
+  $("bracket").innerHTML = `
+    <div class="round">
+      <h3>WILD CARD · WEEK 15</h3>
+
+      <div class="match">
+        <div>
+          <span>#3 ${label(seeds[2])}</span>
+          <span>vs</span>
+        </div>
+        <div>
+          <span>#6 ${label(seeds[5])}</span>
+        </div>
+      </div>
+
+      <div class="match">
+        <div>
+          <span>#4 ${label(seeds[3])}</span>
+          <span>vs</span>
+        </div>
+        <div>
+          <span>#5 ${label(seeds[4])}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="round">
+      <h3>SEMIFINALS · WEEK 16</h3>
+
+      <div class="match">
+        <div class="winner">
+          <span>#1 ${label(seeds[0])}</span>
+          <span>BYE</span>
+        </div>
+        <div>
+          <span>vs 4/5 winner</span>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="winner">
+          <span>#2 ${label(seeds[1])}</span>
+          <span>BYE</span>
+        </div>
+        <div>
+          <span>vs 3/6 winner</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="round">
+      <h3>CHAMPIONSHIP · WEEK 17</h3>
+
+      <div class="match">
+        <div class="winner">
+          🏆 ${label(leader)}
+        </div>
+        <div>
+          <span>Most likely champion</span>
+          <b>${fmt(leader.champPct)}</b>
+        </div>
+      </div>
+
+      <p class="small">
+        This is a projected bracket, not a guaranteed outcome.
+        Seeds are selected from simulation results.
+        The league does not reseed after the wild-card round.
+        The championship favorite may differ from the
+        teams shown in this single projected bracket.
+      </p>
+    </div>
+  `;
+
+  const challenger = champions[1];
+
+  const underdogs = teams
+    .filter(t => Number(t.wins || 0) <= 1)
+    .sort((a,b) => b.playoffPct-a.playoffPct);
+
+  const underdog = underdogs[0];
+
+  const topScorer = [...teams].sort(
+    (a,b) => b.ppg-a.ppg
+  )[0];
+
+  const insights = [
+    [
+      "🏆 Championship favorite",
+      `${leader.name} leads with ${fmt(leader.champPct)} title odds.`
+    ],
+    [
+      "⚡ Biggest challenger",
+      `${challenger.name} is next at ${fmt(challenger.champPct)}.`
+    ],
+    [
+      "📈 Comeback watch",
+      underdog
+        ? `${underdog.name} has a ${fmt(underdog.playoffPct)} playoff chance despite a ${record(underdog)} record.`
+        : "Every team has more than one win."
+    ],
+    [
+      "🎟️ First-round bye",
+      `${byeOrder[0].name} leads at ${fmt(byeOrder[0].byePct)}.`
+    ],
+    [
+      "📊 Highest scoring",
+      `${topScorer.name} leads with ${num(topScorer.ppg)} points per game.`
+    ],
+    [
+      "🔍 Simulation model",
+      `${Number(data.simulations).toLocaleString()} simulated seasons using ESPN matchups and team scoring estimates.`
+    ]
+  ];
+
+  $("insights").innerHTML = insights.map(([heading,value]) => `
+    <div class="insight">
+      <b>${safe(heading)}</b>
+      <span class="small">${safe(value)}</span>
+    </div>
+  `).join("");
+
+  // Roster report: actual ESPN lineup slots.
+  $("rosters").innerHTML = standings.map(team => {
+    const players = Array.isArray(team.roster)
+      ? team.roster : [];
+
+    const starters = players.filter(
+      p => starterSlots.has(Number(p.slot))
+    );
+
+    const bench = players.filter(
+      p => !starterSlots.has(Number(p.slot))
+    );
+
+    const playerRow = (player,isStarter) => {
+      const injury = player.injury
+        && player.injury !== "ACTIVE"
+        ? safe(player.injury) : "";
+
+      const projection = player.projected != null
+        ? `${num(player.projected)} pts`
+        : "No projection";
+
+      return `
+        <div class="player">
+          <span>${safe(player.name)}</span>
+          <span>
+            <span class="${isStarter ? "starter" : "bench"}">
+              ${isStarter ? "START" : "BENCH"}
+            </span>
+            · ${projection}
+            ${injury ? `<span class="status"> · ${injury}</span>` : ""}
+          </span>
+        </div>
+      `;
+    };
+
+    return `
+      <div class="rosterbox">
+        <h3 style="color:${teamColor(team,teams)}">
+          ${safe(team.name)}
+          <span class="small">${record(team)}</span>
+        </h3>
+
+        <div class="small" style="margin-bottom:8px">
+          STARTING LINEUP
+        </div>
+
+        ${starters.map(p => playerRow(p,true)).join("")
+          || '<p class="small">No starters available</p>'}
+
+        <div class="small" style="margin:13px 0 8px">
+          BENCH / RESERVE
+        </div>
+
+        ${bench.map(p => playerRow(p,false)).join("")
+          || '<p class="small">No bench players available</p>'}
+      </div>
+    `;
+  }).join("");
+
+  $("disclaimer").innerHTML = `
+    <b>How predictions work:</b>
+    ${safe(data.method || "ESPN-based Monte Carlo simulation.")}
+    <br>
+    <b>Simulation count:</b>
+    ${Number(data.simulations).toLocaleString()}.
+    <br>
+    <b>Data:</b>
+    ESPN snapshot through Week ${Number(data.throughWeek)}.
+    The website refreshes from published GitHub data;
+    it does not continuously access ESPN.
+    <br>
+    <b>Important:</b>
+    Probabilities are estimates, not guarantees.
+    Player injuries, lineup changes, and future matchups
+    can change the predictions.
+  `;
+
+  // Check whether the published snapshot is getting old.
+  const ageHours = (
+    Date.now()-updatedDate.getTime()
+  ) / 3600000;
+
+  if (ageHours > 24 * 9) {
+    showWarning(
+      "This ESPN snapshot is more than nine days old. "
+      + "The scheduled updater may need attention."
+    );
+  } else {
+    clearWarning();
+  }
+}
+
+async function load() {
+  $("refresh").disabled = true;
+  $("refresh").textContent = "↻ Loading…";
+
+  try {
+    const response = await fetch(
+      "data/dashboard.json?ts=" + Date.now(),
+      {cache:"no-store"}
+    );
+
+    if (!response.ok) {
+      throw Error(
+        "The published ESPN dashboard data could not be loaded."
+      );
+    }
+
+    const data = await response.json();
+
+    if (
+      data.mode !== "live"
+      || !Array.isArray(data.teams)
+      || data.teams.length !== 10
+      || !data.updatedAt
+      || !Number.isFinite(Date.parse(data.updatedAt))
+    ) {
+      throw Error("The ESPN dashboard data is incomplete.");
+    }
+
+    render(data);
+
+  } catch (error) {
+    console.error("Dashboard update error:",error);
+
+    showWarning(
+      "Unable to load or display the latest ESPN predictions. "
+      + "Please check the GitHub Actions updater and try "
+      + "refreshing the page. "
+      + "Previously displayed numbers may be outdated.",
+      true
+    );
+
+    $("mode").innerHTML =
+      '<b style="color:#ffb4b4">● ESPN DATA ERROR</b>';
+
+    $("disclaimer").textContent =
+      "Predictions could not be verified. "
+      + "Do not treat displayed values as current.";
+
+  } finally {
+    $("refresh").disabled = false;
+    $("refresh").textContent = "↻ Refresh";
+  }
+}
+
+$("refresh").addEventListener("click",load);
+load();
+</script>
+
+</body>
+</html>
