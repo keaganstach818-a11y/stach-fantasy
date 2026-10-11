@@ -128,7 +128,13 @@ def run(d):
         for week,home,away in future:
             hs=max(0,rng.normal(strength[home],23));as_=max(0,rng.normal(strength[away],23))
             w[home if hs>as_ else away]+=1;p[home]+=hs;p[away]+=as_
-        order=sorted(range(n),key=lambda j:(w[j],p[j]),reverse=True)
+                # Rank teams by wins, then total points scored.
+        # This matches the league's playoff seeding tiebreaker.
+        order = sorted(
+            range(n),
+            key=lambda j: (w[j], p[j]),
+            reverse=True
+        )
         sumwins+=w
         for rank,j in enumerate(order): ranks[j]+=rank+1
         seeds=order[:6]
