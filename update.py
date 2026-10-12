@@ -1,12 +1,12 @@
-"""Stach Fantasy Football HQ — ESPN season simulator.
+"""Stach Fantasy Football HQ: schedule-aware, injury-aware Monte Carlo model.
 
-Future injury returns are unknown: blend current healthy-lineup information
-with historical scoring instead of projecting today's lineup unchanged.
+This is an independent estimate, not ESPN's official playoff projection.
 """
-import datetime
+import datetime as dt
 import json
+import math
 import os
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -15,378 +15,303 @@ import requests
 LEAGUE = 2108436489
 YEAR = 2026
 SIMS = 20000
-SEED = 20261013
-# Historical results dominate until forward-looking player data is reliable.
-LINEUP_WEIGHT = 0.22
-SCORE_SD = 23.0
-# Return probabilities are assumptions, not medical predictions.
-RETURN_HAZARD = {
-    "QUESTIONABLE": 0.75, "DOUBTFUL": 0.35, "OUT": 0.30,
-    "INJURY_RESERVE": 0.10, "SUSPENSION": 0.08,
-    "PROBABLE": 0.95,
-}
-POSITION = {1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "DST"}
-OUT = Path(__file__).parent / 'data' / 'dashboard.json'
-URL = (f'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/'
-       f'seasons/{YEAR}/segments/0/leagues/{LEAGUE}')
+OUT = Path(__file__).resolve().parent / 'data' / 'dashboard.json'
+URL = f'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{YEAR}/segments/0/leagues/{LEAGUE}'
 STARTER_SLOTS = {0, 2, 4, 6, 23, 16, 17}
-INACTIVE = {'OUT', 'INJURY_RESERVE', 'SUSPENSION'}
+POSITION_PRIORS = {1: 17.0, 2: 11.0, 3: 11.0, 4: 8.5, 5: 8.0, 16: 7.0}
+FLEX_POSITIONS = (2, 3, 4)
 
 
-def load():
-    views = ['mTeam', 'mRoster', 'mMatchupScore', 'mSettings',
-             'mStatus', 'mStandings']
+def fetch():
     cookies = {}
     if os.getenv('ESPN_S2') and os.getenv('ESPN_SWID'):
-        cookies = {'espn_s2': os.environ['ESPN_S2'],
-                   'SWID': os.environ['ESPN_SWID']}
-    response = requests.get(URL, params=[('view', v) for v in views],
-                            cookies=cookies,
-                            headers={'User-Agent': 'StachFantasyDashboard/3.0'},
-                            timeout=35)
+        cookies = {'espn_s2': os.environ['ESPN_S2'], 'SWID': os.environ['ESPN_SWID']}
+    views = ['mTeam', 'mRoster', 'mMatchupScore', 'mSettings', 'mStatus', 'mStandings']
+    response = requests.get(URL, params=[('view', v) for v in views], cookies=cookies,
+                            headers={'User-Agent': 'StachFantasyDashboard/3.0'}, timeout=40)
     response.raise_for_status()
     data = response.json()
     if len(data.get('teams', [])) != 10:
-        raise RuntimeError('ESPN did not return all 10 teams.')
+        raise ValueError('ESPN did not provide all ten teams')
     return data
 
 
-def team_name(team):
-    return (team.get('name') or
-            (team.get('location', '') + ' ' +
-             team.get('nickname', '')).strip() or
-            f"Team {team['id']}")
+def number(value, default=0.0):
+    try:
+        result = float(value)
+        return result if math.isfinite(result) else default
+    except (TypeError, ValueError):
+        return default
 
 
-def player_baseline(player, current_week):
-    """Use weekly historical points and current projection when available."""
-    stats = player.get('stats') or []
-    projections = [float(s['appliedTotal']) for s in stats
-                   if s.get('statSourceId') == 1
-                   and s.get('scoringPeriodId') == current_week
-                   and s.get('appliedTotal') is not None]
-    actual = [float(s['appliedTotal']) for s in stats
-              if s.get('statSourceId') == 0
-              and isinstance(s.get('scoringPeriodId'), int)
-              and 1 <= s['scoringPeriodId'] < current_week
-              and s.get('appliedTotal') is not None]
-    recent = actual[-4:]
-    historical = float(np.mean(recent)) if recent else None
-    projected = projections[0] if projections else None
-    if projected is not None and historical is not None:
-        result = 0.65 * projected + 0.35 * historical
-    elif projected is not None:
-        result = projected
-    elif historical is not None:
-        result = historical
-    else:
-        result = None
-    return round(max(0.0, min(50.0, result)), 2) if result is not None else None
+def name(team):
+    return team.get('name') or (str(team.get('location', '')) + ' ' + str(team.get('nickname', ''))).strip() or f"Team {team['id']}"
 
 
-def lineup_total(players, week_offset, return_weeks):
-    """Draw possible player availability and choose a legal fantasy lineup."""
-    eligible = {position: [] for position in ('QB', 'RB', 'WR', 'TE', 'DST', 'K')}
-    for player_index, player in enumerate(players):
-        position = player.get('position')
-        value = player.get('baseline')
-        if position not in eligible or value is None:
-            continue
-        status = (player.get('injury') or 'ACTIVE').upper()
-        if status in RETURN_HAZARD and week_offset < return_weeks.get(player_index, 999):
-            continue
-        eligible[position].append(float(value))
-    for values in eligible.values():
-        values.sort(reverse=True)
-    required = {'QB': 1, 'RB': 2, 'WR': 2, 'TE': 1, 'DST': 1, 'K': 1}
-    score = 0.0
-    used = {}
-    for position, count in required.items():
-        selected = eligible[position][:count]
-        used[position] = len(selected)
-        score += sum(selected)
-    flex = [v for position in ('RB', 'WR', 'TE')
-            for v in eligible[position][used[position]:]]
-    if flex:
-        score += max(flex)
-    # Missing position projections make a lineup estimate unreliable.
-    filled = sum(used.values()) + bool(flex)
-    return score if filled == 9 and 55 <= score <= 240 else None
-
-
-def roster(team, current_week):
-    players = []
+def parse_players(team, current):
+    result = []
     for entry in (team.get('roster') or {}).get('entries', []):
         player = ((entry.get('playerPoolEntry') or {}).get('player') or {})
         if not player:
             continue
-        projections = [s for s in player.get('stats', [])
-                       if s.get('statSourceId') == 1
-                       and s.get('scoringPeriodId') == current_week
-                       and s.get('appliedTotal') is not None]
-        projection = (float(projections[0]['appliedTotal'])
-                      if projections else None)
-        players.append({
-            'name': player.get('fullName', 'Unknown'),
-            'injury': player.get('injuryStatus', 'ACTIVE'),
+        pos = int(player.get('defaultPositionId') or -1)
+        if pos not in POSITION_PRIORS:
+            continue
+        status = str(player.get('injuryStatus') or 'ACTIVE').upper()
+        projections = []
+        actuals = []
+        for stat in player.get('stats') or []:
+            period = int(stat.get('scoringPeriodId') or 0)
+            source = int(stat.get('statSourceId', -1) if stat.get('statSourceId') is not None else -1)
+            value = stat.get('appliedTotal')
+            if value is None:
+                continue
+            if source == 1 and period == current:
+                projections.append(number(value))
+            if source == 0 and 1 <= period < current:
+                actuals.append(number(value))
+        projection = projections[0] if projections else None
+        prior = POSITION_PRIORS[pos]
+        if actuals:
+            history = float(np.mean(actuals[-5:]))
+            historical = (len(actuals) * history + 3 * prior) / (len(actuals) + 3)
+        else:
+            historical = prior
+        # A zero current-week projection is NOT evidence of zero rest-of-season value.
+        # It can mean bye, injury, or missing ESPN projection.
+        if projection is not None and projection > 0.5:
+            expected = 0.60 * projection + 0.40 * historical
+        else:
+            expected = historical
+        expected = max(1.0, min(35.0, expected))
+        result.append({
+            'name': player.get('fullName') or 'Unknown',
+            'position': pos,
+            'injury': status,
             'slot': entry.get('lineupSlotId'),
-            'position': POSITION.get(player.get('defaultPositionId'), ''),
-            'baseline': player_baseline(player, current_week),
-            'projected': round(projection, 2)
-                         if projection is not None else None,
+            'projected': round(projection, 2) if projection is not None else None,
+            '_mean': expected,
         })
-    return players
+    return result
 
 
-def estimate_strength(ppg, recent, league_mean, players):
-    """Regularized scoring estimate: avoid overreacting to four games."""
-    return float(0.52 * ppg + 0.28 * recent + 0.20 * league_mean)
+def lineup_value(players, available):
+    """Optimize QB, 2 RB, 2 WR, TE, FLEX, DST, K without reusing players."""
+    pool = defaultdict(list)
+    for player, active in zip(players, available):
+        if active:
+            pool[player['position']].append(player['_mean'])
+    for values in pool.values():
+        values.sort(reverse=True)
+    chosen = []
+    for pos, count in ((1, 1), (2, 2), (3, 2), (4, 1), (16, 1), (5, 1)):
+        values = pool[pos]
+        chosen.extend(values[:count])
+        pool[pos] = values[count:]
+        # Replacement-level placeholders avoid treating an incomplete roster as 0 points.
+        if len(values) < count:
+            chosen.extend([POSITION_PRIORS[pos] * 0.65] * (count - len(values)))
+    flex = max((pool[pos][0] for pos in FLEX_POSITIONS if pool[pos]), default=7.0)
+    return float(sum(chosen) + flex)
 
 
-def run(data):
+def return_week(status, rng):
+    """Draw an uncertain return delay. No claim of a confirmed medical timetable."""
+    if status in ('INJURY_RESERVE', 'IR'):
+        return int(rng.choice([3, 5, 7, 11, 20], p=[.12, .23, .25, .20, .20]))
+    if status in ('OUT', 'DOUBTFUL'):
+        return int(rng.choice([1, 2, 3, 5, 9], p=[.20, .35, .25, .15, .05]))
+    if status in ('SUSPENSION',):
+        return int(rng.choice([2, 4, 7, 12], p=[.25, .35, .25, .15]))
+    if status in ('QUESTIONABLE', 'PROBABLE'):
+        return int(rng.choice([0, 1, 2], p=[.65, .25, .10]))
+    return 0
+
+
+def compute(data):
     teams = data['teams']
     ids = [int(t['id']) for t in teams]
-    index = {team_id: i for i, team_id in enumerate(ids)}
-    n = len(ids)
-    schedule_settings = ((data.get('settings') or {})
-                         .get('scheduleSettings') or {})
-    regular_weeks = int(schedule_settings.get('matchupPeriodCount') or 14)
-    playoff_teams = int(schedule_settings.get('playoffTeamCount') or 6)
-    if n != 10 or playoff_teams != 6 or regular_weeks != 14:
-        raise RuntimeError('League format has changed.')
-
+    if len(set(ids)) != 10:
+        raise ValueError('Duplicate ESPN team IDs')
+    lookup = {team_id: i for i, team_id in enumerate(ids)}
+    settings = (data.get('settings') or {}).get('scheduleSettings') or {}
+    regular = int(settings.get('matchupPeriodCount') or 14)
+    playoff_slots = int(settings.get('playoffTeamCount') or 6)
+    if regular != 14 or playoff_slots != 6:
+        raise ValueError('League playoff settings have changed; review model')
     status = data.get('status') or {}
-    current = int(status.get('currentMatchupPeriod') or 1)
-    current = max(1, min(current, regular_weeks + 1))
-    wins = np.zeros(n, dtype=int)
-    losses = np.zeros(n, dtype=int)
-    ties = np.zeros(n, dtype=int)
-    points_for = np.zeros(n, dtype=float)
-    points_against = np.zeros(n, dtype=float)
-    history = {team_id: [] for team_id in ids}
-    future = []
+    current = max(1, min(regular + 1, int(status.get('currentMatchupPeriod') or 1)))
+
+    wins = np.zeros(10, dtype=int)
+    losses = np.zeros(10, dtype=int)
+    ties = np.zeros(10, dtype=int)
+    points_for = np.zeros(10)
+    points_against = np.zeros(10)
+    histories = [[] for _ in teams]
+    future = defaultdict(list)
     completed = []
-
-    for matchup in data.get('schedule') or []:
-        home = matchup.get('home') or {}
-        away = matchup.get('away') or {}
-        home_id, away_id = home.get('teamId'), away.get('teamId')
-        try:
-            home_id, away_id = int(home_id), int(away_id)
-        except (TypeError, ValueError):
+    for match in data.get('schedule') or []:
+        home = match.get('home') or {}
+        away = match.get('away') or {}
+        hi, ai = home.get('teamId'), away.get('teamId')
+        if hi not in lookup or ai not in lookup:
             continue
-        if home_id not in index or away_id not in index:
+        week = int(match.get('matchupPeriodId') or 0)
+        if not 1 <= week <= regular:
             continue
-        week = int(matchup.get('matchupPeriodId') or 0)
-        if not 1 <= week <= regular_weeks:
-            continue
-        h, a = index[home_id], index[away_id]
-        winner = matchup.get('winner', 'UNDECIDED')
-        hs = float(home.get('totalPoints') or 0)
-        as_ = float(away.get('totalPoints') or 0)
+        h, a = lookup[hi], lookup[ai]
+        winner = str(match.get('winner') or 'UNDECIDED')
         if week < current and winner in ('HOME', 'AWAY', 'TIE'):
+            hs = number(home.get('totalPoints'))
+            ass = number(away.get('totalPoints'))
             if winner == 'HOME':
-                wins[h] += 1
-                losses[a] += 1
+                wins[h] += 1; losses[a] += 1
             elif winner == 'AWAY':
-                wins[a] += 1
-                losses[h] += 1
+                wins[a] += 1; losses[h] += 1
             else:
-                ties[h] += 1
-                ties[a] += 1
-            points_for[h] += hs
-            points_for[a] += as_
-            points_against[h] += as_
-            points_against[a] += hs
-            history[home_id].append((week, hs))
-            history[away_id].append((week, as_))
-            completed.append({'week': week, 'home': home_id,
-                              'away': away_id, 'homeScore': hs,
-                              'awayScore': as_})
+                ties[h] += 1; ties[a] += 1
+            points_for[h] += hs; points_for[a] += ass
+            points_against[h] += ass; points_against[a] += hs
+            histories[h].append((week, hs)); histories[a].append((week, ass))
+            completed.append({'week': week, 'home': hi, 'away': ai,
+                              'homeScore': hs, 'awayScore': ass})
         elif week >= current:
-            future.append((week, h, a))
+            future[week].append((h, a))
 
-    for team in teams:
-        i = index[int(team['id'])]
-        record = ((team.get('record') or {}).get('overall') or {})
-        played = int(record.get('gamesPlayed') or 0)
-        observed = int(wins[i] + losses[i] + ties[i])
-        if observed == 0 and played > 0:
-            wins[i] = int(record.get('wins') or 0)
-            losses[i] = int(record.get('losses') or 0)
-            ties[i] = int(record.get('ties') or 0)
-            points_for[i] = float(record.get('pointsFor') or 0)
-            points_against[i] = float(record.get('pointsAgainst') or 0)
-        elif played > observed:
-            raise RuntimeError('ESPN schedule is missing completed results.')
-        elif observed > 0 and played > 0 and played != observed:
-            raise RuntimeError('ESPN record and completed matchups disagree.')
-
-    for week in range(current, regular_weeks + 1):
-        games = [(h, a) for w, h, a in future if w == week]
+    # Do not silently simulate an incomplete or duplicated schedule.
+    for week in range(current, regular + 1):
+        games = future[week]
         participants = sorted(j for pair in games for j in pair)
-        if len(games) != n // 2 or participants != list(range(n)):
-            raise RuntimeError(f'Incomplete ESPN schedule for week {week}.')
+        if len(games) != 5 or participants != list(range(10)):
+            raise ValueError(f'ESPN schedule incomplete for week {week}')
 
-    roster_data = [roster(t, current) for t in teams]
-    played = wins + losses + ties
-    ppg = np.array([points_for[i] / played[i]
-                    if played[i] else 120.0 for i in range(n)])
+    for i, team in enumerate(teams):
+        overall = ((team.get('record') or {}).get('overall') or {})
+        reported = int(overall.get('gamesPlayed') or 0)
+        observed = int(wins[i] + losses[i] + ties[i])
+        if reported > observed:
+            raise ValueError('ESPN records and completed matchups disagree; refusing to publish misleading odds')
+
+    players = [parse_players(t, current) for t in teams]
+    games_played = wins + losses + ties
+    ppg = np.array([points_for[i] / games_played[i] if games_played[i] else 120.0
+                    for i in range(10)])
     league_mean = float(np.mean(ppg))
-    strength = np.zeros(n, dtype=float)
-    for i in range(n):
-        recent_games = sorted(history[ids[i]],
-                              key=lambda x: x[0], reverse=True)[:3]
-        if recent_games:
-            weights = [0.55, 0.30, 0.15][:len(recent_games)]
-            recent = float(np.average([s for _, s in recent_games],
-                                      weights=weights))
-        else:
-            recent = float(ppg[i])
-        strength[i] = estimate_strength(float(ppg[i]), recent,
-                                        league_mean, roster_data[i])
+    roster_healthy = np.array([lineup_value(p, [True] * len(p)) for p in players])
+    # Avoid overreacting to just four results; normalize uncertain roster estimates.
+    roster_center = float(np.mean(roster_healthy))
+    roster_adjusted = league_mean + (roster_healthy - roster_center) * 0.75
+    baseline = np.zeros(10)
+    for i in range(10):
+        games = int(games_played[i])
+        history_est = (games * ppg[i] + 5 * league_mean) / (games + 5)
+        baseline[i] = 0.55 * history_est + 0.45 * roster_adjusted[i]
 
-    rng = np.random.default_rng(SEED + current + int(np.sum(points_for)))
-    playoff_counts = np.zeros(n)
-    bye_counts = np.zeros(n)
-    championship_counts = np.zeros(n)
-    win_totals = np.zeros(n)
-    rank_totals = np.zeros(n)
-    seed_counts = [Counter() for _ in range(6)]
-    bracket_counts = Counter()
-    # Compute injury-aware team strength for each future week once per
-    # simulation. Return dates are sampled rather than assumed certain.
-    remaining_weeks = sorted({week for week, _, _ in future})
-
-    def playoff_game(x, y, team_strength):
-        sx, sy = rng.normal([team_strength[x], team_strength[y]],
-                            [SCORE_SD, SCORE_SD])
-        return x if sx > sy else y if sy > sx else (x if rng.random() < 0.5 else y)
+    # Reproducible simulations for identical inputs; no daily random fluctuations.
+    seed = 20261012 + current + int(round(float(points_for.sum()) * 100))
+    rng = np.random.default_rng(seed)
+    playoff_counts = np.zeros(10, dtype=int)
+    bye_counts = np.zeros(10, dtype=int)
+    champ_counts = np.zeros(10, dtype=int)
+    win_totals = np.zeros(10)
+    rank_totals = np.zeros(10)
+    seed_brackets = Counter()
 
     for _ in range(SIMS):
-        sim_wins = wins.copy()
-        sim_ties = ties.copy()
-        sim_points = points_for.copy()
-        # Each injured player gets one possible return week per season,
-        # so a return remains in effect in later simulated weeks.
-        return_scenarios = []
-        for players in roster_data:
-            returns = {}
-            for k, player in enumerate(players):
-                status = (player.get('injury') or 'ACTIVE').upper()
-                if status in RETURN_HAZARD:
-                    delay = 3 if status in ('INJURY_RESERVE', 'SUSPENSION') else 0
-                    returns[k] = delay + int(rng.geometric(RETURN_HAZARD[status])) - 1
-            return_scenarios.append(returns)
-        weekly_strength = {}
-        for week in remaining_weeks:
-            offset = week - current
-            estimates = []
-            for j in range(n):
-                lineup = lineup_total(roster_data[j], offset, return_scenarios[j])
-                if lineup is None:
-                    estimates.append(strength[j])
-                else:
-                    # Limit lineup impact; weekly ESPN projections are noisy.
-                    estimates.append((1 - LINEUP_WEIGHT) * strength[j]
-                                     + LINEUP_WEIGHT * lineup)
-            weekly_strength[week] = estimates
-        for week, home, away in future:
-            hs, as_ = np.maximum(0, rng.normal(
-                [weekly_strength[week][home],
-                 weekly_strength[week][away]], [SCORE_SD, SCORE_SD]))
-            hs, as_ = round(float(hs), 2), round(float(as_), 2)
-            if hs > as_:
-                sim_wins[home] += 1
-            elif as_ > hs:
-                sim_wins[away] += 1
-            else:
-                sim_ties[home] += 1
-                sim_ties[away] += 1
-            sim_points[home] += hs
-            sim_points[away] += as_
+        sw = wins.copy()
+        st = ties.copy()
+        sp = points_for.copy()
+        # Season-long team uncertainty, rather than pretending our means are exact.
+        season_bias = rng.normal(0, 5, 10)
+        returns = [[return_week(p['injury'], rng) for p in roster] for roster in players]
+        weekly_means = {}
+        for week in range(current, regular + 4):
+            delta = week - current
+            values = []
+            for i, roster in enumerate(players):
+                active = [delta >= delay for delay in returns[i]]
+                lineup = lineup_value(roster, active)
+                roster_delta = (lineup - roster_healthy[i]) * 0.70
+                values.append(max(65.0, baseline[i] + roster_delta + season_bias[i]))
+            weekly_means[week] = values
 
-        order = sorted(range(n), key=lambda j: (
-            sim_wins[j] + 0.5 * sim_ties[j], sim_points[j]), reverse=True)
-        win_totals += sim_wins + 0.5 * sim_ties
+        for week in range(current, regular + 1):
+            means = weekly_means[week]
+            for h, a in future[week]:
+                hs, ass = np.maximum(0, rng.normal([means[h], means[a]], [23, 23]))
+                hs = round(float(hs), 2)
+                ass = round(float(ass), 2)
+                if hs > ass:
+                    sw[h] += 1
+                elif ass > hs:
+                    sw[a] += 1
+                else:
+                    st[h] += 1; st[a] += 1
+                sp[h] += hs; sp[a] += ass
+
+        order = sorted(range(10), key=lambda j: (sw[j] + .5 * st[j], sp[j]), reverse=True)
+        win_totals += sw + .5 * st
         for rank, j in enumerate(order):
             rank_totals[j] += rank + 1
-        seeds = order[:6]
-        bracket_counts[tuple(seeds)] += 1
-        for position, j in enumerate(seeds):
+        seeds = tuple(order[:6])
+        seed_brackets[seeds] += 1
+        for j in seeds:
             playoff_counts[j] += 1
-            seed_counts[position][j] += 1
-        bye_counts[seeds[0]] += 1
-        bye_counts[seeds[1]] += 1
-        # Project playoff-week strength, allowing injuries to resolve.
-        playoff_strength = []
-        for j in range(n):
-            estimate = lineup_total(roster_data[j],
-                                    regular_weeks + 1 - current,
-                                    return_scenarios[j])
-            playoff_strength.append(
-                strength[j] if estimate is None else
-                (1 - LINEUP_WEIGHT) * strength[j] + LINEUP_WEIGHT * estimate
-            )
-        wc36 = playoff_game(seeds[2], seeds[5], playoff_strength)
-        wc45 = playoff_game(seeds[3], seeds[4], playoff_strength)
-        finalist1 = playoff_game(seeds[0], wc45, playoff_strength)
-        finalist2 = playoff_game(seeds[1], wc36, playoff_strength)
-        championship_counts[playoff_game(finalist1, finalist2, playoff_strength)] += 1
+        for j in seeds[:2]:
+            bye_counts[j] += 1
 
-    output_teams = []
-    for i in range(n):
-        output_teams.append({
-            'id': ids[i], 'name': team_name(teams[i]),
-            'wins': int(wins[i]), 'losses': int(losses[i]),
-            'ties': int(ties[i]),
+        def game(x, y, week):
+            mx, my = weekly_means[week][x], weekly_means[week][y]
+            sx, sy = rng.normal([mx, my], [23, 23])
+            return x if sx > sy else y if sy > sx else (x if rng.random() < .5 else y)
+
+        w36 = game(seeds[2], seeds[5], regular + 1)
+        w45 = game(seeds[3], seeds[4], regular + 1)
+        f1 = game(seeds[0], w45, regular + 2)
+        f2 = game(seeds[1], w36, regular + 2)
+        champ_counts[game(f1, f2, regular + 3)] += 1
+
+    if sum(playoff_counts) != 6 * SIMS or sum(bye_counts) != 2 * SIMS or sum(champ_counts) != SIMS:
+        raise AssertionError('Probability accounting failed')
+    projected = seed_brackets.most_common(1)[0][0]
+    result_teams = []
+    for i, team in enumerate(teams):
+        public_roster = [{k: p[k] for k in ('name', 'injury', 'slot', 'projected')}
+                         for p in players[i]]
+        result_teams.append({
+            'id': ids[i], 'name': name(team), 'wins': int(wins[i]),
+            'losses': int(losses[i]), 'ties': int(ties[i]),
             'pointsFor': round(float(points_for[i]), 2),
             'pointsAgainst': round(float(points_against[i]), 2),
             'ppg': round(float(ppg[i]), 1),
-            'strength': round(float(strength[i]), 1),
+            'strength': round(float(baseline[i]), 1),
             'projectedWins': round(float(win_totals[i] / SIMS), 1),
             'averageRank': round(float(rank_totals[i] / SIMS), 2),
-            'playoffPct': round(float(playoff_counts[i] / SIMS * 100), 1),
-            'byePct': round(float(bye_counts[i] / SIMS * 100), 1),
-            'champPct': round(float(championship_counts[i] / SIMS * 100), 1),
-            'roster': roster_data[i],
+            'playoffPct': round(float(playoff_counts[i] * 100 / SIMS), 1),
+            'byePct': round(float(bye_counts[i] * 100 / SIMS), 1),
+            'champPct': round(float(champ_counts[i] * 100 / SIMS), 1),
+            'roster': public_roster,
         })
-    output_teams.sort(key=lambda t: (
-        t['wins'] + 0.5 * t['ties'], t['pointsFor']), reverse=True)
-
-    # A real simulated seed combination, not six independent picks.
-    projected_seeds = [ids[j] for j in bracket_counts.most_common(1)[0][0]]
-    assert int(np.sum(championship_counts)) == SIMS
-    assert int(np.sum(playoff_counts)) == 6 * SIMS
-    assert int(np.sum(bye_counts)) == 2 * SIMS
-
+    result_teams.sort(key=lambda t: (t['wins'] + t['ties'] / 2, t['pointsFor']), reverse=True)
     return {
         'mode': 'live', 'leagueId': LEAGUE, 'season': YEAR,
         'leagueName': 'Stach Fantasy Football',
-        'updatedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        'throughWeek': max(0, current - 1), 'currentWeek': current,
-        'regularSeasonWeeks': regular_weeks, 'simulations': SIMS,
-        'teams': output_teams, 'projectedSeeds': projected_seeds,
+        'updatedAt': dt.datetime.now(dt.timezone.utc).isoformat(),
+        'throughWeek': current - 1, 'currentWeek': current,
+        'regularSeasonWeeks': regular, 'simulations': SIMS,
+        'teams': result_teams, 'projectedSeeds': [ids[j] for j in projected],
         'completedMatchups': completed,
-        'method': (
-            '20,000 Monte Carlo seasons using ESPN matchups, scoring '
-            'history, and cautiously weighted player projections. '
-            'All teams have uncertain future player availability, including '
-            'the playoffs. Injury return chances are broad modeling '
-            'assumptions, not verified medical timelines. '
-            'Six playoff spots, two byes, points-for standings tiebreaker, '
-            'and a fixed playoff bracket without reseeding. '
-            'These are estimates, not guarantees.'
-        ),
+        'method': ('Independent 20,000-season Monte Carlo estimate using ESPN records, '
+                   'remaining schedule, recent scoring, player projections, all-roster lineup '
+                   'optimization, uncertain injury returns, and team-strength uncertainty. '
+                   'Return dates are hypothetical, not confirmed. This is not ESPN\'s official projection.'),
     }
 
 
 if __name__ == '__main__':
-    result = run(load())
+    result = compute(fetch())
     OUT.parent.mkdir(parents=True, exist_ok=True)
     temporary = OUT.with_suffix('.json.tmp')
     temporary.write_text(json.dumps(result, indent=2), encoding='utf-8')
     temporary.replace(OUT)
-    print(f"Updated {len(result['teams'])} teams "
-          f"through week {result['throughWeek']}; "
-          f"{result['simulations']:,} simulations")
+    print(f"Updated {len(result['teams'])} teams, {result['simulations']:,} simulations")
