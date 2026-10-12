@@ -3,7 +3,7 @@
   "leagueId": 2108436489,
   "season": 2026,
   "leagueName": "Stach Fantasy Football",
-  "updatedAt": "2026-10-12T15:13:43.759916+00:00",
+  "updatedAt": "2026-10-12T15:19:26.603957+00:00",
   "throughWeek": 4,
   "currentWeek": 5,
   "regularSeasonWeeks": 14,
@@ -18,19 +18,19 @@
       "pointsFor": 595.24,
       "pointsAgainst": 373.78,
       "ppg": 148.8,
-      "strength": 146.2,
-      "projectedWins": 10.9,
-      "averageRank": 1.43,
+      "strength": 145.0,
+      "projectedWins": 11.0,
+      "averageRank": 1.4,
       "playoffPct": 100.0,
-      "byePct": 90.5,
-      "champPct": 51.1,
+      "byePct": 91.1,
+      "champPct": 41.9,
       "roster": [
         {
           "name": "Jaxon Smith-Njigba",
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 16.94,
+          "baseline": 17.72,
           "projected": 20.48
         },
         {
@@ -38,7 +38,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 18.18,
+          "baseline": 18.11,
           "projected": 17.84
         },
         {
@@ -46,7 +46,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 17.92,
+          "baseline": 17.61,
           "projected": 16.54
         },
         {
@@ -54,7 +54,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 20.34,
+          "baseline": 15.82,
           "projected": 0.0
         },
         {
@@ -62,7 +62,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 10.61,
+          "baseline": 10.88,
           "projected": 11.85
         },
         {
@@ -70,7 +70,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 11.27,
+          "baseline": 13.32,
           "projected": 20.5
         },
         {
@@ -78,7 +78,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 15.57,
+          "baseline": 15.06,
           "projected": 13.26
         },
         {
@@ -86,7 +86,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 6.28,
+          "baseline": 7.17,
           "projected": 10.27
         },
         {
@@ -102,7 +102,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 11.65,
+          "baseline": 9.06,
           "projected": 0.0
         },
         {
@@ -110,7 +110,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 12.29,
+          "baseline": 12.39,
           "projected": 12.77
         },
         {
@@ -118,7 +118,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 11.43,
+          "baseline": 11.11,
           "projected": 9.98
         },
         {
@@ -126,7 +126,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 5.62,
+          "baseline": 6.33,
           "projected": 8.82
         },
         {
@@ -134,7 +134,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 2.31,
+          "baseline": 2.92,
           "projected": 5.03
         },
         {
@@ -142,7 +142,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 13.12,
+          "baseline": 12.23,
           "projected": 9.12
         },
         {
@@ -150,7 +150,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 18.84,
+          "baseline": 18.07,
           "projected": 15.37
         }
       ]
@@ -164,19 +164,19 @@
       "pointsFor": 487.96,
       "pointsAgainst": 364.06,
       "ppg": 122.0,
-      "strength": 118.6,
-      "projectedWins": 7.8,
-      "averageRank": 4.83,
-      "playoffPct": 82.0,
-      "byePct": 11.0,
-      "champPct": 3.6,
+      "strength": 118.1,
+      "projectedWins": 7.9,
+      "averageRank": 4.63,
+      "playoffPct": 84.8,
+      "byePct": 13.1,
+      "champPct": 4.4,
       "roster": [
         {
           "name": "Jahmyr Gibbs",
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 22.82,
+          "baseline": 23.75,
           "projected": 27.0
         },
         {
@@ -184,7 +184,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 19.28,
+          "baseline": 19.42,
           "projected": 19.9
         },
         {
@@ -192,7 +192,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 10.83,
+          "baseline": 11.61,
           "projected": 14.37
         },
         {
@@ -200,7 +200,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 6.85,
+          "baseline": 7.5,
           "projected": 9.76
         },
         {
@@ -216,7 +216,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 15.17,
+          "baseline": 14.83,
           "projected": 13.66
         },
         {
@@ -224,7 +224,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 5.16,
+          "baseline": 5.75,
           "projected": 7.82
         },
         {
@@ -232,7 +232,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 3.0,
+          "baseline": 3.18,
           "projected": 3.81
         },
         {
@@ -240,7 +240,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 10.44,
+          "baseline": 10.52,
           "projected": 10.8
         },
         {
@@ -248,7 +248,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "WR",
-          "baseline": 3.83,
+          "baseline": 2.97,
           "projected": 0.0
         },
         {
@@ -256,7 +256,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "RB",
-          "baseline": 17.14,
+          "baseline": 17.2,
           "projected": 17.42
         },
         {
@@ -264,7 +264,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 15.01,
+          "baseline": 15.27,
           "projected": 16.19
         },
         {
@@ -272,7 +272,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "WR",
-          "baseline": 4.09,
+          "baseline": 3.18,
           "projected": 0.0
         },
         {
@@ -280,7 +280,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 7.89,
+          "baseline": 7.84,
           "projected": 7.64
         },
         {
@@ -288,7 +288,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 17.4,
+          "baseline": 16.23,
           "projected": 12.16
         },
         {
@@ -304,7 +304,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "DST",
-          "baseline": 2.16,
+          "baseline": 2.37,
           "projected": 3.11
         }
       ]
@@ -318,19 +318,19 @@
       "pointsFor": 525.1,
       "pointsAgainst": 481.42,
       "ppg": 131.3,
-      "strength": 134.5,
-      "projectedWins": 9.5,
-      "averageRank": 2.5,
+      "strength": 134.6,
+      "projectedWins": 9.4,
+      "averageRank": 2.53,
       "playoffPct": 98.8,
-      "byePct": 62.4,
-      "champPct": 23.2,
+      "byePct": 62.0,
+      "champPct": 28.3,
       "roster": [
         {
           "name": "Bijan Robinson",
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 24.68,
+          "baseline": 24.13,
           "projected": 22.21
         },
         {
@@ -338,7 +338,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 15.38,
+          "baseline": 15.52,
           "projected": 16.02
         },
         {
@@ -346,7 +346,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 22.91,
+          "baseline": 21.48,
           "projected": 16.45
         },
         {
@@ -354,7 +354,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 26.3,
+          "baseline": 24.41,
           "projected": 17.79
         },
         {
@@ -362,7 +362,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 10.58,
+          "baseline": 10.38,
           "projected": 9.67
         },
         {
@@ -370,7 +370,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 7.04,
+          "baseline": 8.32,
           "projected": 12.79
         },
         {
@@ -378,7 +378,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 13.32,
+          "baseline": 13.38,
           "projected": 13.59
         },
         {
@@ -386,7 +386,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 16.69,
+          "baseline": 16.89,
           "projected": 17.58
         },
         {
@@ -394,7 +394,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 16.68,
+          "baseline": 16.71,
           "projected": 16.82
         },
         {
@@ -402,7 +402,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 5.98,
+          "baseline": 7.07,
           "projected": 10.87
         },
         {
@@ -410,7 +410,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 5.94,
+          "baseline": 6.12,
           "projected": 6.72
         },
         {
@@ -418,7 +418,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 15.02,
+          "baseline": 15.66,
           "projected": 17.91
         },
         {
@@ -434,7 +434,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 9.61,
+          "baseline": 9.36,
           "projected": 8.47
         },
         {
@@ -442,7 +442,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 9.66,
+          "baseline": 7.51,
           "projected": 0.0
         },
         {
@@ -450,7 +450,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 15.05,
+          "baseline": 15.89,
           "projected": 18.82
         }
       ]
@@ -464,19 +464,19 @@
       "pointsFor": 516.0,
       "pointsAgainst": 447.98,
       "ppg": 129.0,
-      "strength": 121.6,
-      "projectedWins": 7.1,
-      "averageRank": 5.44,
-      "playoffPct": 71.9,
-      "byePct": 4.8,
-      "champPct": 3.7,
+      "strength": 120.5,
+      "projectedWins": 7.2,
+      "averageRank": 5.25,
+      "playoffPct": 75.1,
+      "byePct": 6.0,
+      "champPct": 3.8,
       "roster": [
         {
           "name": "Ja'Marr Chase",
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 14.55,
+          "baseline": 16.16,
           "projected": 21.78
         },
         {
@@ -484,7 +484,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 16.38,
+          "baseline": 16.47,
           "projected": 16.77
         },
         {
@@ -492,7 +492,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 14.85,
+          "baseline": 15.72,
           "projected": 18.74
         },
         {
@@ -508,7 +508,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 11.77,
+          "baseline": 12.6,
           "projected": 15.51
         },
         {
@@ -516,7 +516,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 12.66,
+          "baseline": 12.94,
           "projected": 13.94
         },
         {
@@ -524,7 +524,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 13.3,
+          "baseline": 12.78,
           "projected": 10.94
         },
         {
@@ -532,7 +532,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 12.7,
+          "baseline": 12.71,
           "projected": 12.77
         },
         {
@@ -540,7 +540,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 8.06,
+          "baseline": 8.25,
           "projected": 8.93
         },
         {
@@ -548,7 +548,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 5.54,
+          "baseline": 5.34,
           "projected": 4.67
         },
         {
@@ -556,7 +556,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 11.64,
+          "baseline": 11.22,
           "projected": 9.72
         },
         {
@@ -572,7 +572,7 @@
           "injury": "OUT",
           "slot": 21,
           "position": "RB",
-          "baseline": 12.6,
+          "baseline": 9.8,
           "projected": 0.0
         },
         {
@@ -588,7 +588,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "QB",
-          "baseline": 2.4,
+          "baseline": 1.87,
           "projected": 0.0
         },
         {
@@ -596,7 +596,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 8.1,
+          "baseline": 7.76,
           "projected": 6.55
         },
         {
@@ -604,7 +604,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 14.28,
+          "baseline": 14.5,
           "projected": 15.26
         }
       ]
@@ -618,19 +618,19 @@
       "pointsFor": 508.68,
       "pointsAgainst": 515.74,
       "ppg": 127.2,
-      "strength": 127.0,
-      "projectedWins": 7.9,
-      "averageRank": 4.42,
-      "playoffPct": 86.3,
-      "byePct": 13.4,
-      "champPct": 8.5,
+      "strength": 126.7,
+      "projectedWins": 7.8,
+      "averageRank": 4.46,
+      "playoffPct": 85.9,
+      "byePct": 13.1,
+      "champPct": 8.0,
       "roster": [
         {
           "name": "CeeDee Lamb",
           "injury": "QUESTIONABLE",
           "slot": 4,
           "position": "WR",
-          "baseline": 29.11,
+          "baseline": 26.89,
           "projected": 19.13
         },
         {
@@ -646,7 +646,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 13.9,
+          "baseline": 10.81,
           "projected": 0.0
         },
         {
@@ -654,7 +654,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 7.65,
+          "baseline": 5.95,
           "projected": 0.0
         },
         {
@@ -662,7 +662,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 10.68,
+          "baseline": 11.24,
           "projected": 13.21
         },
         {
@@ -670,7 +670,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 11.86,
+          "baseline": 11.89,
           "projected": 11.99
         },
         {
@@ -678,7 +678,7 @@
           "injury": "QUESTIONABLE",
           "slot": 23,
           "position": "RB",
-          "baseline": 8.47,
+          "baseline": 9.22,
           "projected": 11.87
         },
         {
@@ -686,7 +686,7 @@
           "injury": "QUESTIONABLE",
           "slot": 2,
           "position": "RB",
-          "baseline": 7.69,
+          "baseline": 8.32,
           "projected": 10.54
         },
         {
@@ -694,7 +694,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 14.21,
+          "baseline": 13.79,
           "projected": 12.33
         },
         {
@@ -702,7 +702,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 18.68,
+          "baseline": 18.5,
           "projected": 17.9
         },
         {
@@ -710,7 +710,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 8.72,
+          "baseline": 9.16,
           "projected": 10.7
         },
         {
@@ -718,7 +718,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 11.41,
+          "baseline": 11.0,
           "projected": 9.54
         },
         {
@@ -726,7 +726,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 5.04,
+          "baseline": 5.41,
           "projected": 6.7
         },
         {
@@ -734,7 +734,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 16.25,
+          "baseline": 16.31,
           "projected": 16.51
         },
         {
@@ -742,7 +742,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 12.15,
+          "baseline": 11.44,
           "projected": 8.99
         },
         {
@@ -750,7 +750,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 9.08,
+          "baseline": 9.42,
           "projected": 10.61
         },
         {
@@ -758,7 +758,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 12.36,
+          "baseline": 12.27,
           "projected": 11.92
         }
       ]
@@ -772,19 +772,19 @@
       "pointsFor": 496.06,
       "pointsAgainst": 498.1,
       "ppg": 124.0,
-      "strength": 125.3,
-      "projectedWins": 8.0,
-      "averageRank": 4.07,
-      "playoffPct": 91.2,
-      "byePct": 16.7,
-      "champPct": 8.0,
+      "strength": 125.4,
+      "projectedWins": 7.8,
+      "averageRank": 4.35,
+      "playoffPct": 88.5,
+      "byePct": 13.7,
+      "champPct": 10.5,
       "roster": [
         {
           "name": "Amon-Ra St. Brown",
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 17.97,
+          "baseline": 18.42,
           "projected": 20.0
         },
         {
@@ -792,7 +792,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 15.97,
+          "baseline": 15.92,
           "projected": 15.71
         },
         {
@@ -800,7 +800,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 10.62,
+          "baseline": 11.51,
           "projected": 14.64
         },
         {
@@ -808,7 +808,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 23.71,
+          "baseline": 22.33,
           "projected": 17.5
         },
         {
@@ -816,7 +816,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 21.93,
+          "baseline": 21.16,
           "projected": 18.47
         },
         {
@@ -824,7 +824,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 11.88,
+          "baseline": 11.97,
           "projected": 12.28
         },
         {
@@ -832,7 +832,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 11.98,
+          "baseline": 12.42,
           "projected": 13.96
         },
         {
@@ -840,7 +840,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 17.28,
+          "baseline": 16.35,
           "projected": 13.09
         },
         {
@@ -848,7 +848,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 1.57,
+          "baseline": 1.22,
           "projected": 0.0
         },
         {
@@ -856,7 +856,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 10.27,
+          "baseline": 9.95,
           "projected": 8.85
         },
         {
@@ -864,7 +864,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 5.59,
+          "baseline": 5.33,
           "projected": 4.44
         },
         {
@@ -872,7 +872,7 @@
           "injury": "QUESTIONABLE",
           "slot": 20,
           "position": "WR",
-          "baseline": 10.92,
+          "baseline": 10.83,
           "projected": 10.52
         },
         {
@@ -880,7 +880,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 11.67,
+          "baseline": 12.21,
           "projected": 14.1
         },
         {
@@ -888,7 +888,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 9.88,
+          "baseline": 9.31,
           "projected": 7.32
         },
         {
@@ -896,7 +896,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 15.47,
+          "baseline": 14.0,
           "projected": 8.83
         },
         {
@@ -904,7 +904,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "RB",
-          "baseline": 19.62,
+          "baseline": 18.28,
           "projected": 13.59
         }
       ]
@@ -918,10 +918,10 @@
       "pointsFor": 387.68,
       "pointsAgainst": 516.4,
       "ppg": 96.9,
-      "strength": 95.2,
-      "projectedWins": 3.8,
-      "averageRank": 9.31,
-      "playoffPct": 2.1,
+      "strength": 95.8,
+      "projectedWins": 4.0,
+      "averageRank": 9.14,
+      "playoffPct": 3.4,
       "byePct": 0.0,
       "champPct": 0.0,
       "roster": [
@@ -930,7 +930,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "RB",
-          "baseline": 0.9,
+          "baseline": 0.7,
           "projected": 0.0
         },
         {
@@ -938,7 +938,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 10.38,
+          "baseline": 12.27,
           "projected": 18.88
         },
         {
@@ -954,7 +954,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "QB",
-          "baseline": 8.5,
+          "baseline": 6.61,
           "projected": 0.0
         },
         {
@@ -962,7 +962,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 12.71,
+          "baseline": 13.68,
           "projected": 17.06
         },
         {
@@ -970,7 +970,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 11.12,
+          "baseline": 12.04,
           "projected": 15.24
         },
         {
@@ -978,7 +978,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "WR",
-          "baseline": 3.69,
+          "baseline": 2.87,
           "projected": 0.0
         },
         {
@@ -986,7 +986,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 7.54,
+          "baseline": 7.82,
           "projected": 8.8
         },
         {
@@ -994,7 +994,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 5.62,
+          "baseline": 5.89,
           "projected": 6.86
         },
         {
@@ -1002,7 +1002,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 8.69,
+          "baseline": 9.44,
           "projected": 12.04
         },
         {
@@ -1010,7 +1010,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 19.89,
+          "baseline": 19.78,
           "projected": 19.41
         },
         {
@@ -1018,7 +1018,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 6.73,
+          "baseline": 6.5,
           "projected": 5.69
         },
         {
@@ -1026,7 +1026,7 @@
           "injury": "INJURY_RESERVE",
           "slot": 21,
           "position": "RB",
-          "baseline": 2.02,
+          "baseline": 1.57,
           "projected": 0.0
         },
         {
@@ -1034,7 +1034,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 10.9,
+          "baseline": 10.71,
           "projected": 10.07
         },
         {
@@ -1042,7 +1042,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 8.66,
+          "baseline": 9.87,
           "projected": 14.11
         },
         {
@@ -1050,7 +1050,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 8.11,
+          "baseline": 8.55,
           "projected": 10.09
         }
       ]
@@ -1064,19 +1064,19 @@
       "pointsFor": 403.36,
       "pointsAgainst": 561.98,
       "ppg": 100.8,
-      "strength": 108.1,
-      "projectedWins": 5.9,
-      "averageRank": 7.1,
-      "playoffPct": 32.7,
-      "byePct": 0.7,
-      "champPct": 0.4,
+      "strength": 109.6,
+      "projectedWins": 5.7,
+      "averageRank": 7.34,
+      "playoffPct": 28.0,
+      "byePct": 0.6,
+      "champPct": 0.8,
       "roster": [
         {
           "name": "Puka Nacua",
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 24.39,
+          "baseline": 23.79,
           "projected": 21.68
         },
         {
@@ -1084,7 +1084,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 18.18,
+          "baseline": 18.02,
           "projected": 17.44
         },
         {
@@ -1092,7 +1092,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 11.54,
+          "baseline": 11.91,
           "projected": 13.21
         },
         {
@@ -1100,7 +1100,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 21.7,
+          "baseline": 21.34,
           "projected": 20.06
         },
         {
@@ -1108,7 +1108,7 @@
           "injury": "QUESTIONABLE",
           "slot": 2,
           "position": "RB",
-          "baseline": 17.76,
+          "baseline": 17.07,
           "projected": 14.63
         },
         {
@@ -1116,7 +1116,7 @@
           "injury": "QUESTIONABLE",
           "slot": 20,
           "position": "WR",
-          "baseline": 8.13,
+          "baseline": 9.12,
           "projected": 12.57
         },
         {
@@ -1124,7 +1124,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 11.07,
+          "baseline": 11.68,
           "projected": 13.83
         },
         {
@@ -1132,7 +1132,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 7.84,
+          "baseline": 7.61,
           "projected": 6.81
         },
         {
@@ -1140,7 +1140,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 4.49,
+          "baseline": 4.03,
           "projected": 2.43
         },
         {
@@ -1148,7 +1148,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 14.36,
+          "baseline": 15.21,
           "projected": 18.18
         },
         {
@@ -1156,7 +1156,7 @@
           "injury": "OUT",
           "slot": 20,
           "position": "WR",
-          "baseline": 2.25,
+          "baseline": 1.75,
           "projected": 0.0
         },
         {
@@ -1164,7 +1164,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "K",
-          "baseline": 2.7,
+          "baseline": 2.1,
           "projected": 0.0
         },
         {
@@ -1172,7 +1172,7 @@
           "injury": "QUESTIONABLE",
           "slot": 6,
           "position": "TE",
-          "baseline": 16.99,
+          "baseline": 15.55,
           "projected": 10.51
         },
         {
@@ -1180,7 +1180,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 14.54,
+          "baseline": 14.76,
           "projected": 15.54
         },
         {
@@ -1188,7 +1188,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 14.89,
+          "baseline": 14.09,
           "projected": 11.29
         },
         {
@@ -1196,7 +1196,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 13.79,
+          "baseline": 12.84,
           "projected": 9.53
         }
       ]
@@ -1210,19 +1210,19 @@
       "pointsFor": 479.9,
       "pointsAgainst": 532.32,
       "ppg": 120.0,
-      "strength": 121.2,
+      "strength": 121.4,
       "projectedWins": 4.4,
-      "averageRank": 8.07,
-      "playoffPct": 15.4,
+      "averageRank": 8.1,
+      "playoffPct": 15.5,
       "byePct": 0.2,
-      "champPct": 0.7,
+      "champPct": 1.1,
       "roster": [
         {
           "name": "Jonathan Taylor",
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 20.64,
+          "baseline": 20.26,
           "projected": 18.95
         },
         {
@@ -1230,7 +1230,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 12.59,
+          "baseline": 12.46,
           "projected": 12.01
         },
         {
@@ -1246,7 +1246,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 17.9,
+          "baseline": 16.93,
           "projected": 13.56
         },
         {
@@ -1254,7 +1254,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 19.06,
+          "baseline": 17.67,
           "projected": 12.8
         },
         {
@@ -1262,7 +1262,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 17.11,
+          "baseline": 16.31,
           "projected": 13.51
         },
         {
@@ -1278,7 +1278,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 17.87,
+          "baseline": 17.83,
           "projected": 17.68
         },
         {
@@ -1286,7 +1286,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "RB",
-          "baseline": 8.83,
+          "baseline": 8.49,
           "projected": 7.3
         },
         {
@@ -1294,7 +1294,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 9.89,
+          "baseline": 9.69,
           "projected": 8.99
         },
         {
@@ -1302,7 +1302,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 13.2,
+          "baseline": 13.13,
           "projected": 12.88
         },
         {
@@ -1318,7 +1318,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 7.89,
+          "baseline": 8.23,
           "projected": 9.43
         },
         {
@@ -1326,7 +1326,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 7.52,
+          "baseline": 6.71,
           "projected": 3.86
         },
         {
@@ -1350,7 +1350,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 13.77,
+          "baseline": 13.1,
           "projected": 10.79
         }
       ]
@@ -1364,19 +1364,19 @@
       "pointsFor": 462.32,
       "pointsAgainst": 570.52,
       "ppg": 115.6,
-      "strength": 119.2,
+      "strength": 119.8,
       "projectedWins": 4.8,
-      "averageRank": 7.83,
-      "playoffPct": 19.5,
-      "byePct": 0.2,
-      "champPct": 0.8,
+      "averageRank": 7.81,
+      "playoffPct": 20.2,
+      "byePct": 0.3,
+      "champPct": 1.1,
       "roster": [
         {
           "name": "Christian McCaffrey",
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 17.49,
+          "baseline": 17.77,
           "projected": 18.72
         },
         {
@@ -1384,7 +1384,7 @@
           "injury": "ACTIVE",
           "slot": 6,
           "position": "TE",
-          "baseline": 18.25,
+          "baseline": 17.83,
           "projected": 16.33
         },
         {
@@ -1392,7 +1392,7 @@
           "injury": "ACTIVE",
           "slot": 4,
           "position": "WR",
-          "baseline": 19.31,
+          "baseline": 18.13,
           "projected": 13.99
         },
         {
@@ -1400,7 +1400,7 @@
           "injury": "ACTIVE",
           "slot": 23,
           "position": "WR",
-          "baseline": 12.78,
+          "baseline": 12.46,
           "projected": 11.37
         },
         {
@@ -1408,7 +1408,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "QB",
-          "baseline": 14.91,
+          "baseline": 15.16,
           "projected": 16.04
         },
         {
@@ -1416,7 +1416,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 12.95,
+          "baseline": 12.5,
           "projected": 10.94
         },
         {
@@ -1424,7 +1424,7 @@
           "injury": "INJURY_RESERVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 1.57,
+          "baseline": 1.22,
           "projected": 0.0
         },
         {
@@ -1432,7 +1432,7 @@
           "injury": "ACTIVE",
           "slot": 0,
           "position": "QB",
-          "baseline": 16.26,
+          "baseline": 16.84,
           "projected": 18.87
         },
         {
@@ -1440,7 +1440,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 8.52,
+          "baseline": 8.31,
           "projected": 7.56
         },
         {
@@ -1448,7 +1448,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "WR",
-          "baseline": 4.95,
+          "baseline": 3.85,
           "projected": 0.0
         },
         {
@@ -1456,7 +1456,7 @@
           "injury": "ACTIVE",
           "slot": 17,
           "position": "K",
-          "baseline": 6.96,
+          "baseline": 7.31,
           "projected": 8.56
         },
         {
@@ -1464,7 +1464,7 @@
           "injury": "QUESTIONABLE",
           "slot": 4,
           "position": "WR",
-          "baseline": 14.2,
+          "baseline": 13.51,
           "projected": 11.09
         },
         {
@@ -1472,7 +1472,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "TE",
-          "baseline": 5.74,
+          "baseline": 6.26,
           "projected": 8.06
         },
         {
@@ -1480,7 +1480,7 @@
           "injury": "ACTIVE",
           "slot": 20,
           "position": "DST",
-          "baseline": 4.97,
+          "baseline": 4.96,
           "projected": 4.94
         },
         {
@@ -1488,7 +1488,7 @@
           "injury": "ACTIVE",
           "slot": 2,
           "position": "RB",
-          "baseline": 16.4,
+          "baseline": 15.24,
           "projected": 11.17
         },
         {
@@ -1496,7 +1496,7 @@
           "injury": "ACTIVE",
           "slot": 16,
           "position": "DST",
-          "baseline": 5.8,
+          "baseline": 6.12,
           "projected": 7.27
         }
       ]
@@ -1652,5 +1652,5 @@
       "awayScore": 63.08
     }
   ],
-  "method": "20,000 Monte Carlo seasons using ESPN matchups, past scoring, recent performance, and available healthy starter projections. Future weekly lineups are sampled for all teams using player history, projections, and uncertain injury-return scenarios. Return chances are assumptions, not verified return dates. Six playoff spots, two byes, points-for standings tiebreaker, and a fixed playoff bracket without reseeding. These are estimates, not guarantees."
+  "method": "20,000 Monte Carlo seasons using ESPN matchups, scoring history, and cautiously weighted player projections. All teams have uncertain future player availability, including the playoffs. Injury return chances are broad modeling assumptions, not verified medical timelines. Six playoff spots, two byes, points-for standings tiebreaker, and a fixed playoff bracket without reseeding. These are estimates, not guarantees."
 }
