@@ -16,6 +16,12 @@ LEAGUE = 2108436489
 YEAR = 2026
 SIMS = 20000
 SEED = 20261013
+# Return probabilities are assumptions, not medical predictions.
+RETURN_HAZARD = {
+    "QUESTIONABLE": 0.75, "DOUBTFUL": 0.35, "OUT": 0.30,
+    "INJURY_RESERVE": 0.12, "SUSPENSION": 0.12,
+}
+POSITION = {1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "DST"}
 OUT = Path(__file__).parent / 'data' / 'dashboard.json'
 URL = (f'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/'
        f'seasons/{YEAR}/segments/0/leagues/{LEAGUE}')
@@ -48,6 +54,62 @@ def team_name(team):
             f"Team {team['id']}")
 
 
+def player_baseline(player, current_week):
+    """Use weekly historical points and current projection when available."""
+    stats = player.get('stats') or []
+    projections = [float(s['appliedTotal']) for s in stats
+                   if s.get('statSourceId') == 1
+                   and s.get('scoringPeriodId') == current_week
+                   and s.get('appliedTotal') is not None]
+    actual = [float(s['appliedTotal']) for s in stats
+              if s.get('statSourceId') == 0
+              and isinstance(s.get('scoringPeriodId'), int)
+              and 1 <= s['scoringPeriodId'] < current_week
+              and s.get('appliedTotal') is not None]
+    recent = actual[-4:]
+    historical = float(np.mean(recent)) if recent else None
+    projected = projections[0] if projections else None
+    if projected is not None and historical is not None:
+        result = 0.55 * projected + 0.45 * historical
+    elif projected is not None:
+        result = projected
+    elif historical is not None:
+        result = historical
+    else:
+        result = None
+    return round(max(0.0, min(50.0, result)), 2) if result is not None else None
+
+
+def lineup_total(players, week_offset, return_weeks):
+    """Draw possible player availability and choose a legal fantasy lineup."""
+    eligible = {position: [] for position in ('QB', 'RB', 'WR', 'TE', 'DST', 'K')}
+    for player_index, player in enumerate(players):
+        position = player.get('position')
+        value = player.get('baseline')
+        if position not in eligible or value is None:
+            continue
+        status = (player.get('injury') or 'ACTIVE').upper()
+        if status in RETURN_HAZARD and week_offset < return_weeks.get(player_index, 999):
+            continue
+        eligible[position].append(float(value))
+    for values in eligible.values():
+        values.sort(reverse=True)
+    required = {'QB': 1, 'RB': 2, 'WR': 2, 'TE': 1, 'DST': 1, 'K': 1}
+    score = 0.0
+    used = {}
+    for position, count in required.items():
+        selected = eligible[position][:count]
+        used[position] = len(selected)
+        score += sum(selected)
+    flex = [v for position in ('RB', 'WR', 'TE')
+            for v in eligible[position][used[position]:]]
+    if flex:
+        score += max(flex)
+    # Missing position projections make a lineup estimate unreliable.
+    filled = sum(used.values()) + bool(flex)
+    return score if filled == 9 and 60 <= score <= 240 else None
+
+
 def roster(team, current_week):
     players = []
     for entry in (team.get('roster') or {}).get('entries', []):
@@ -64,6 +126,8 @@ def roster(team, current_week):
             'name': player.get('fullName', 'Unknown'),
             'injury': player.get('injuryStatus', 'ACTIVE'),
             'slot': entry.get('lineupSlotId'),
+            'position': POSITION.get(player.get('defaultPositionId'), ''),
+            'baseline': player_baseline(player, current_week),
             'projected': round(projection, 2)
                          if projection is not None else None,
         })
@@ -71,26 +135,8 @@ def roster(team, current_week):
 
 
 def estimate_strength(ppg, recent, league_mean, players):
-    """Conservative future-week estimate; not an injury-return forecast."""
-    # Past scoring and league average remain the main anchors.
-    historical = 0.60 * ppg + 0.25 * recent + 0.15 * league_mean
-    starters = [p for p in players if p['slot'] in STARTER_SLOTS]
-    valid = [p['projected'] for p in starters
-             if p['projected'] is not None
-             and p['injury'] not in INACTIVE
-             and 0 <= p['projected'] <= 60]
-
-    # If all nine healthy starters have projections, use the lineup as
-    # supporting evidence, not a season-long certainty.
-    if len(starters) == 9 and len(valid) == 9:
-        lineup = sum(valid)
-        if 65 <= lineup <= 230:
-            return float(0.75 * historical + 0.25 * lineup)
-
-    # Missing or injured starters: use partial information cautiously.
-    # Never add zeroes for absent players or assume they stay out all year.
-    # A partial lineup cannot estimate total team points reliably.
-    return float(historical)
+    """Past scoring anchors the model; future rosters vary by week."""
+    return float(0.60 * ppg + 0.25 * recent + 0.15 * league_mean)
 
 
 def run(data):
@@ -198,6 +244,9 @@ def run(data):
     rank_totals = np.zeros(n)
     seed_counts = [Counter() for _ in range(6)]
     bracket_counts = Counter()
+    # Compute injury-aware team strength for each future week once per
+    # simulation. Return dates are sampled rather than assumed certain.
+    remaining_weeks = sorted({week for week, _, _ in future})
 
     def playoff_game(x, y):
         sx, sy = rng.normal([strength[x], strength[y]], [23, 23])
@@ -207,9 +256,34 @@ def run(data):
         sim_wins = wins.copy()
         sim_ties = ties.copy()
         sim_points = points_for.copy()
+        # Each injured player gets one possible return week per season,
+        # so a return remains in effect in later simulated weeks.
+        return_scenarios = []
+        for players in roster_data:
+            returns = {}
+            for k, player in enumerate(players):
+                status = (player.get('injury') or 'ACTIVE').upper()
+                if status in RETURN_HAZARD:
+                    delay = 3 if status in ('INJURY_RESERVE', 'SUSPENSION') else 0
+                    returns[k] = delay + int(rng.geometric(RETURN_HAZARD[status])) - 1
+            return_scenarios.append(returns)
+        weekly_strength = {}
+        for week in remaining_weeks:
+            offset = week - current
+            estimates = []
+            for j in range(n):
+                lineup = lineup_total(roster_data[j], offset, return_scenarios[j])
+                if lineup is None:
+                    estimates.append(strength[j])
+                else:
+                    # The historical anchor prevents an optimistic future
+                    # best-lineup estimate from overwhelming real results.
+                    estimates.append(0.70 * strength[j] + 0.30 * lineup)
+            weekly_strength[week] = estimates
         for week, home, away in future:
             hs, as_ = np.maximum(0, rng.normal(
-                [strength[home], strength[away]], [23, 23]))
+                [weekly_strength[week][home],
+                 weekly_strength[week][away]], [23, 23]))
             hs, as_ = round(float(hs), 2), round(float(as_), 2)
             if hs > as_:
                 sim_wins[home] += 1
@@ -276,8 +350,9 @@ def run(data):
         'method': (
             '20,000 Monte Carlo seasons using ESPN matchups, past scoring, '
             'recent performance, and available healthy starter projections. '
-            'Missing or injured starters do not count as zero for all future '
-            'weeks. Future injury returns are unknown and are not predicted. '
+            'Future weekly lineups are sampled for all teams using player '
+            'history, projections, and uncertain injury-return scenarios. '
+            'Return chances are assumptions, not verified return dates. '
             'Six playoff spots, two byes, points-for standings tiebreaker, '
             'and a fixed playoff bracket without reseeding. '
             'These are estimates, not guarantees.'
