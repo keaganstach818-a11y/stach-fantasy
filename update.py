@@ -16,10 +16,14 @@ LEAGUE = 2108436489
 YEAR = 2026
 SIMS = 20000
 SEED = 20261013
+# Historical results dominate until forward-looking player data is reliable.
+LINEUP_WEIGHT = 0.22
+SCORE_SD = 23.0
 # Return probabilities are assumptions, not medical predictions.
 RETURN_HAZARD = {
     "QUESTIONABLE": 0.75, "DOUBTFUL": 0.35, "OUT": 0.30,
-    "INJURY_RESERVE": 0.12, "SUSPENSION": 0.12,
+    "INJURY_RESERVE": 0.10, "SUSPENSION": 0.08,
+    "PROBABLE": 0.95,
 }
 POSITION = {1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "DST"}
 OUT = Path(__file__).parent / 'data' / 'dashboard.json'
@@ -70,7 +74,7 @@ def player_baseline(player, current_week):
     historical = float(np.mean(recent)) if recent else None
     projected = projections[0] if projections else None
     if projected is not None and historical is not None:
-        result = 0.55 * projected + 0.45 * historical
+        result = 0.65 * projected + 0.35 * historical
     elif projected is not None:
         result = projected
     elif historical is not None:
@@ -107,7 +111,7 @@ def lineup_total(players, week_offset, return_weeks):
         score += max(flex)
     # Missing position projections make a lineup estimate unreliable.
     filled = sum(used.values()) + bool(flex)
-    return score if filled == 9 and 60 <= score <= 240 else None
+    return score if filled == 9 and 55 <= score <= 240 else None
 
 
 def roster(team, current_week):
@@ -135,8 +139,8 @@ def roster(team, current_week):
 
 
 def estimate_strength(ppg, recent, league_mean, players):
-    """Past scoring anchors the model; future rosters vary by week."""
-    return float(0.60 * ppg + 0.25 * recent + 0.15 * league_mean)
+    """Regularized scoring estimate: avoid overreacting to four games."""
+    return float(0.52 * ppg + 0.28 * recent + 0.20 * league_mean)
 
 
 def run(data):
@@ -167,6 +171,10 @@ def run(data):
         home = matchup.get('home') or {}
         away = matchup.get('away') or {}
         home_id, away_id = home.get('teamId'), away.get('teamId')
+        try:
+            home_id, away_id = int(home_id), int(away_id)
+        except (TypeError, ValueError):
+            continue
         if home_id not in index or away_id not in index:
             continue
         week = int(matchup.get('matchupPeriodId') or 0)
@@ -211,6 +219,8 @@ def run(data):
             points_against[i] = float(record.get('pointsAgainst') or 0)
         elif played > observed:
             raise RuntimeError('ESPN schedule is missing completed results.')
+        elif observed > 0 and played > 0 and played != observed:
+            raise RuntimeError('ESPN record and completed matchups disagree.')
 
     for week in range(current, regular_weeks + 1):
         games = [(h, a) for w, h, a in future if w == week]
@@ -248,8 +258,9 @@ def run(data):
     # simulation. Return dates are sampled rather than assumed certain.
     remaining_weeks = sorted({week for week, _, _ in future})
 
-    def playoff_game(x, y):
-        sx, sy = rng.normal([strength[x], strength[y]], [23, 23])
+    def playoff_game(x, y, team_strength):
+        sx, sy = rng.normal([team_strength[x], team_strength[y]],
+                            [SCORE_SD, SCORE_SD])
         return x if sx > sy else y if sy > sx else (x if rng.random() < 0.5 else y)
 
     for _ in range(SIMS):
@@ -276,14 +287,14 @@ def run(data):
                 if lineup is None:
                     estimates.append(strength[j])
                 else:
-                    # The historical anchor prevents an optimistic future
-                    # best-lineup estimate from overwhelming real results.
-                    estimates.append(0.70 * strength[j] + 0.30 * lineup)
+                    # Limit lineup impact; weekly ESPN projections are noisy.
+                    estimates.append((1 - LINEUP_WEIGHT) * strength[j]
+                                     + LINEUP_WEIGHT * lineup)
             weekly_strength[week] = estimates
         for week, home, away in future:
             hs, as_ = np.maximum(0, rng.normal(
                 [weekly_strength[week][home],
-                 weekly_strength[week][away]], [23, 23]))
+                 weekly_strength[week][away]], [SCORE_SD, SCORE_SD]))
             hs, as_ = round(float(hs), 2), round(float(as_), 2)
             if hs > as_:
                 sim_wins[home] += 1
@@ -307,11 +318,21 @@ def run(data):
             seed_counts[position][j] += 1
         bye_counts[seeds[0]] += 1
         bye_counts[seeds[1]] += 1
-        wc36 = playoff_game(seeds[2], seeds[5])
-        wc45 = playoff_game(seeds[3], seeds[4])
-        finalist1 = playoff_game(seeds[0], wc45)
-        finalist2 = playoff_game(seeds[1], wc36)
-        championship_counts[playoff_game(finalist1, finalist2)] += 1
+        # Project playoff-week strength, allowing injuries to resolve.
+        playoff_strength = []
+        for j in range(n):
+            estimate = lineup_total(roster_data[j],
+                                    regular_weeks + 1 - current,
+                                    return_scenarios[j])
+            playoff_strength.append(
+                strength[j] if estimate is None else
+                (1 - LINEUP_WEIGHT) * strength[j] + LINEUP_WEIGHT * estimate
+            )
+        wc36 = playoff_game(seeds[2], seeds[5], playoff_strength)
+        wc45 = playoff_game(seeds[3], seeds[4], playoff_strength)
+        finalist1 = playoff_game(seeds[0], wc45, playoff_strength)
+        finalist2 = playoff_game(seeds[1], wc36, playoff_strength)
+        championship_counts[playoff_game(finalist1, finalist2, playoff_strength)] += 1
 
     output_teams = []
     for i in range(n):
@@ -348,11 +369,11 @@ def run(data):
         'teams': output_teams, 'projectedSeeds': projected_seeds,
         'completedMatchups': completed,
         'method': (
-            '20,000 Monte Carlo seasons using ESPN matchups, past scoring, '
-            'recent performance, and available healthy starter projections. '
-            'Future weekly lineups are sampled for all teams using player '
-            'history, projections, and uncertain injury-return scenarios. '
-            'Return chances are assumptions, not verified return dates. '
+            '20,000 Monte Carlo seasons using ESPN matchups, scoring '
+            'history, and cautiously weighted player projections. '
+            'All teams have uncertain future player availability, including '
+            'the playoffs. Injury return chances are broad modeling '
+            'assumptions, not verified medical timelines. '
             'Six playoff spots, two byes, points-for standings tiebreaker, '
             'and a fixed playoff bracket without reseeding. '
             'These are estimates, not guarantees.'
