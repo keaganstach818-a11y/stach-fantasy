@@ -3,7 +3,7 @@
   "leagueId": 2108436489,
   "season": 2026,
   "leagueName": "Stach Fantasy Football",
-  "updatedAt": "2026-11-15T19:32:29.356824+00:00",
+  "updatedAt": "2026-11-16T23:11:12.309896+00:00",
   "throughWeek": 9,
   "currentWeek": 10,
   "regularSeasonWeeks": 14,
@@ -22,14 +22,14 @@
       "projectedWins": 12.2,
       "averageRank": 1.05,
       "playoffPct": 100.0,
-      "byePct": 99.5,
-      "champPct": 34.9,
+      "byePct": 99.6,
+      "champPct": 34.6,
       "roster": [
         {
           "name": "Jaxon Smith-Njigba",
           "injury": "ACTIVE",
           "slot": 23,
-          "projected": 22.3
+          "projected": 22.29
         },
         {
           "name": "Ashton Jeanty",
@@ -134,10 +134,10 @@
       "ppg": 132.6,
       "strength": 124.5,
       "projectedWins": 9.0,
-      "averageRank": 2.58,
-      "playoffPct": 99.7,
-      "byePct": 60.0,
-      "champPct": 24.6,
+      "averageRank": 2.55,
+      "playoffPct": 99.8,
+      "byePct": 62.2,
+      "champPct": 24.7,
       "roster": [
         {
           "name": "Ja'Marr Chase",
@@ -253,11 +253,11 @@
       "pointsAgainst": 1021.14,
       "ppg": 123.6,
       "strength": 121.7,
-      "projectedWins": 8.5,
-      "averageRank": 3.18,
-      "playoffPct": 99.0,
-      "byePct": 29.0,
-      "champPct": 16.2,
+      "projectedWins": 8.4,
+      "averageRank": 3.27,
+      "playoffPct": 98.7,
+      "byePct": 26.9,
+      "champPct": 15.8,
       "roster": [
         {
           "name": "Amon-Ra St. Brown",
@@ -285,9 +285,9 @@
         },
         {
           "name": "Drake Maye",
-          "injury": "QUESTIONABLE",
+          "injury": "DOUBTFUL",
           "slot": 0,
-          "projected": 21.96
+          "projected": 21.97
         },
         {
           "name": "Luther Burden III",
@@ -341,7 +341,7 @@
           "name": "Rams D/ST",
           "injury": "ACTIVE",
           "slot": 16,
-          "projected": 8.26
+          "projected": 8.27
         },
         {
           "name": "Brenton Strange",
@@ -351,7 +351,7 @@
         },
         {
           "name": "Geno Smith",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 20,
           "projected": 14.79
         }
@@ -367,11 +367,11 @@
       "pointsAgainst": 898.88,
       "ppg": 107.6,
       "strength": 112.8,
-      "projectedWins": 8.3,
-      "averageRank": 3.91,
-      "playoffPct": 94.8,
-      "byePct": 10.7,
-      "champPct": 7.0,
+      "projectedWins": 8.2,
+      "averageRank": 3.95,
+      "playoffPct": 94.2,
+      "byePct": 10.4,
+      "champPct": 6.9,
       "roster": [
         {
           "name": "Jahmyr Gibbs",
@@ -393,9 +393,9 @@
         },
         {
           "name": "Ladd McConkey",
-          "injury": "QUESTIONABLE",
+          "injury": "OUT",
           "slot": 4,
-          "projected": 10.44
+          "projected": 0.0
         },
         {
           "name": "George Kittle",
@@ -423,7 +423,7 @@
         },
         {
           "name": "Woody Marks",
-          "injury": "ACTIVE",
+          "injury": "DOUBTFUL",
           "slot": 2,
           "projected": 14.19
         },
@@ -487,11 +487,11 @@
       "pointsAgainst": 1131.4,
       "ppg": 108.7,
       "strength": 112.6,
-      "projectedWins": 5.9,
-      "averageRank": 6.87,
-      "playoffPct": 41.6,
+      "projectedWins": 6.0,
+      "averageRank": 6.84,
+      "playoffPct": 42.0,
       "byePct": 0.6,
-      "champPct": 2.8,
+      "champPct": 3.0,
       "roster": [
         {
           "name": "Saquon Barkley",
@@ -608,10 +608,10 @@
       "ppg": 120.8,
       "strength": 117.6,
       "projectedWins": 5.4,
-      "averageRank": 6.9,
-      "playoffPct": 42.7,
+      "averageRank": 6.89,
+      "playoffPct": 43.2,
       "byePct": 0.0,
-      "champPct": 4.1,
+      "champPct": 4.4,
       "roster": [
         {
           "name": "Jonathan Taylor",
@@ -623,7 +623,7 @@
           "name": "Omarion Hampton",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 7.88
+          "projected": 7.94
         },
         {
           "name": "Rashee Rice",
@@ -653,7 +653,7 @@
           "name": "Jadarian Price",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 11.87
+          "projected": 11.86
         },
         {
           "name": "Dak Prescott",
@@ -689,7 +689,7 @@
           "name": "Zach Charbonnet",
           "injury": "ACTIVE",
           "slot": 2,
-          "projected": 14.53
+          "projected": 14.52
         },
         {
           "name": "Matt Gay",
@@ -729,7 +729,7 @@
       "strength": 117.5,
       "projectedWins": 5.4,
       "averageRank": 7.08,
-      "playoffPct": 40.6,
+      "playoffPct": 40.3,
       "byePct": 0.1,
       "champPct": 3.3,
       "roster": [
@@ -842,10 +842,10 @@
       "ppg": 113.9,
       "strength": 117.7,
       "projectedWins": 5.7,
-      "averageRank": 6.79,
-      "playoffPct": 46.1,
+      "averageRank": 6.75,
+      "playoffPct": 46.7,
       "byePct": 0.1,
-      "champPct": 4.6,
+      "champPct": 4.8,
       "roster": [
         {
           "name": "Bijan Robinson",
@@ -956,10 +956,10 @@
       "ppg": 106.6,
       "strength": 113.5,
       "projectedWins": 5.3,
-      "averageRank": 7.85,
-      "playoffPct": 25.1,
+      "averageRank": 7.84,
+      "playoffPct": 25.0,
       "byePct": 0.0,
-      "champPct": 1.9,
+      "champPct": 1.8,
       "roster": [
         {
           "name": "CeeDee Lamb",
@@ -1076,8 +1076,8 @@
       "ppg": 106.9,
       "strength": 112.4,
       "projectedWins": 4.4,
-      "averageRank": 8.77,
-      "playoffPct": 10.4,
+      "averageRank": 8.79,
+      "playoffPct": 10.1,
       "byePct": 0.0,
       "champPct": 0.7,
       "roster": [
@@ -1089,7 +1089,7 @@
         },
         {
           "name": "Brock Bowers",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 6,
           "projected": 15.41
         },
@@ -1149,7 +1149,7 @@
         },
         {
           "name": "Pat Freiermuth",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 20,
           "projected": 8.77
         },
@@ -1192,7 +1192,7 @@
     7,
     4,
     10,
-    5
+    8
   ],
   "completedMatchups": [
     {
