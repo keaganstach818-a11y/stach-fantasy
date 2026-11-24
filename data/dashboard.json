@@ -3,7 +3,7 @@
   "leagueId": 2108436489,
   "season": 2026,
   "leagueName": "Stach Fantasy Football",
-  "updatedAt": "2026-11-22T20:34:21.720664+00:00",
+  "updatedAt": "2026-11-24T01:28:09.531132+00:00",
   "throughWeek": 10,
   "currentWeek": 11,
   "regularSeasonWeeks": 14,
@@ -133,11 +133,11 @@
       "pointsAgainst": 1030.14,
       "ppg": 132.9,
       "strength": 125.0,
-      "projectedWins": 9.3,
-      "averageRank": 2.2,
+      "projectedWins": 9.2,
+      "averageRank": 2.21,
       "playoffPct": 100.0,
-      "byePct": 80.1,
-      "champPct": 26.8,
+      "byePct": 79.6,
+      "champPct": 26.7,
       "roster": [
         {
           "name": "Ja'Marr Chase",
@@ -171,7 +171,7 @@
         },
         {
           "name": "Bhayshul Tuten",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 2,
           "projected": 16.9
         },
@@ -183,13 +183,13 @@
         },
         {
           "name": "Mike Evans",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 20,
           "projected": 11.47
         },
         {
           "name": "Jacory Croskey-Merritt",
-          "injury": "INJURY_RESERVE",
+          "injury": "ACTIVE",
           "slot": 20,
           "projected": 7.49
         },
@@ -254,10 +254,10 @@
       "ppg": 121.9,
       "strength": 120.8,
       "projectedWins": 7.9,
-      "averageRank": 3.64,
+      "averageRank": 3.63,
       "playoffPct": 96.4,
-      "byePct": 15.5,
-      "champPct": 12.9,
+      "byePct": 15.8,
+      "champPct": 13.0,
       "roster": [
         {
           "name": "Amon-Ra St. Brown",
@@ -297,7 +297,7 @@
         },
         {
           "name": "Sam LaPorta",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 20,
           "projected": 9.53
         },
@@ -368,9 +368,9 @@
       "ppg": 108.8,
       "strength": 114.0,
       "projectedWins": 7.7,
-      "averageRank": 4.59,
-      "playoffPct": 86.7,
-      "byePct": 3.9,
+      "averageRank": 4.6,
+      "playoffPct": 86.6,
+      "byePct": 4.0,
       "champPct": 5.9,
       "roster": [
         {
@@ -488,8 +488,8 @@
       "ppg": 123.9,
       "strength": 122.1,
       "projectedWins": 6.2,
-      "averageRank": 5.94,
-      "playoffPct": 63.1,
+      "averageRank": 5.92,
+      "playoffPct": 63.4,
       "byePct": 0.6,
       "champPct": 8.3,
       "roster": [
@@ -603,7 +603,7 @@
       "strength": 120.7,
       "projectedWins": 6.0,
       "averageRank": 6.2,
-      "playoffPct": 55.5,
+      "playoffPct": 55.4,
       "byePct": 0.2,
       "champPct": 6.7,
       "roster": [
@@ -716,7 +716,7 @@
       "ppg": 113.7,
       "strength": 118.3,
       "projectedWins": 6.1,
-      "averageRank": 6.57,
+      "averageRank": 6.58,
       "playoffPct": 47.9,
       "byePct": 0.0,
       "champPct": 4.7,
@@ -741,7 +741,7 @@
         },
         {
           "name": "Kyren Williams",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 20,
           "projected": 0.0
         },
@@ -831,7 +831,7 @@
       "strength": 114.1,
       "projectedWins": 5.9,
       "averageRank": 7.47,
-      "playoffPct": 29.3,
+      "playoffPct": 29.2,
       "byePct": 0.0,
       "champPct": 2.3,
       "roster": [
@@ -951,13 +951,13 @@
       "strength": 114.0,
       "projectedWins": 5.5,
       "averageRank": 7.9,
-      "playoffPct": 18.7,
+      "playoffPct": 18.6,
       "byePct": 0.0,
       "champPct": 1.5,
       "roster": [
         {
           "name": "Saquon Barkley",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 20,
           "projected": 12.05
         },
@@ -1047,7 +1047,7 @@
         },
         {
           "name": "Dallas Goedert",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 6,
           "projected": 8.22
         },
@@ -1155,7 +1155,7 @@
         },
         {
           "name": "Rachaad White",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 2,
           "projected": 7.71
         },
