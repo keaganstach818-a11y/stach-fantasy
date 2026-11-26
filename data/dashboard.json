@@ -3,7 +3,7 @@
   "leagueId": 2108436489,
   "season": 2026,
   "leagueName": "Stach Fantasy Football",
-  "updatedAt": "2026-11-25T22:55:16.776961+00:00",
+  "updatedAt": "2026-11-26T22:46:43.392171+00:00",
   "throughWeek": 11,
   "currentWeek": 12,
   "regularSeasonWeeks": 14,
@@ -23,11 +23,11 @@
       "averageRank": 1.01,
       "playoffPct": 100.0,
       "byePct": 100.0,
-      "champPct": 32.0,
+      "champPct": 32.6,
       "roster": [
         {
           "name": "Jaxon Smith-Njigba",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 23,
           "projected": 21.6
         },
@@ -83,7 +83,7 @@
           "name": "Matthew Golden",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 16.7
+          "projected": 16.69
         },
         {
           "name": "Khalil Shakir",
@@ -136,8 +136,8 @@
       "projectedWins": 8.7,
       "averageRank": 2.29,
       "playoffPct": 100.0,
-      "byePct": 81.7,
-      "champPct": 28.1,
+      "byePct": 81.5,
+      "champPct": 26.9,
       "roster": [
         {
           "name": "Ja'Marr Chase",
@@ -149,7 +149,7 @@
           "name": "Derrick Henry",
           "injury": "QUESTIONABLE",
           "slot": 2,
-          "projected": 14.48
+          "projected": 14.49
         },
         {
           "name": "Trey McBride",
@@ -179,7 +179,7 @@
           "name": "Jameson Williams",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 12.26
+          "projected": 12.27
         },
         {
           "name": "Mike Evans",
@@ -213,7 +213,7 @@
         },
         {
           "name": "Caleb Williams",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 0,
           "projected": 15.98
         },
@@ -221,7 +221,7 @@
           "name": "Jordan Love",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 13.37
+          "projected": 13.36
         },
         {
           "name": "Buccaneers D/ST",
@@ -231,7 +231,7 @@
         },
         {
           "name": "Marvin Harrison Jr.",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 20,
           "projected": 6.91
         },
@@ -252,12 +252,12 @@
       "pointsFor": 1333.44,
       "pointsAgainst": 1262.2,
       "ppg": 121.2,
-      "strength": 118.9,
+      "strength": 119.0,
       "projectedWins": 7.3,
-      "averageRank": 4.37,
-      "playoffPct": 89.6,
-      "byePct": 10.9,
-      "champPct": 10.2,
+      "averageRank": 4.36,
+      "playoffPct": 90.2,
+      "byePct": 11.2,
+      "champPct": 10.4,
       "roster": [
         {
           "name": "Amon-Ra St. Brown",
@@ -299,7 +299,7 @@
           "name": "Sam LaPorta",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 10.79
+          "projected": 10.8
         },
         {
           "name": "Travis Kelce",
@@ -341,7 +341,7 @@
           "name": "Rams D/ST",
           "injury": "ACTIVE",
           "slot": 16,
-          "projected": 7.69
+          "projected": 7.8
         },
         {
           "name": "Brenton Strange",
@@ -368,16 +368,16 @@
       "ppg": 109.3,
       "strength": 114.5,
       "projectedWins": 7.5,
-      "averageRank": 4.88,
-      "playoffPct": 80.2,
-      "byePct": 3.8,
-      "champPct": 5.8,
+      "averageRank": 4.85,
+      "playoffPct": 80.8,
+      "byePct": 4.0,
+      "champPct": 6.0,
       "roster": [
         {
           "name": "Jahmyr Gibbs",
           "injury": "ACTIVE",
           "slot": 2,
-          "projected": 25.6
+          "projected": 25.61
         },
         {
           "name": "Josh Allen",
@@ -405,7 +405,7 @@
         },
         {
           "name": "Stefon Diggs",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 4,
           "projected": 12.62
         },
@@ -489,9 +489,9 @@
       "strength": 122.8,
       "projectedWins": 6.8,
       "averageRank": 4.88,
-      "playoffPct": 78.0,
-      "byePct": 2.9,
-      "champPct": 11.2,
+      "playoffPct": 78.2,
+      "byePct": 2.8,
+      "champPct": 11.3,
       "roster": [
         {
           "name": "Puka Nacua",
@@ -509,7 +509,7 @@
           "name": "George Pickens",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 14.98
+          "projected": 14.97
         },
         {
           "name": "Joe Burrow",
@@ -531,15 +531,15 @@
         },
         {
           "name": "Christian Watson",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 4,
-          "projected": 14.13
+          "projected": 14.12
         },
         {
           "name": "Matthew Stafford",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 15.3
+          "projected": 15.26
         },
         {
           "name": "T.J. Hockenson",
@@ -551,11 +551,11 @@
           "name": "Tucker Kraft",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 9.24
+          "projected": 9.23
         },
         {
           "name": "Josh Jacobs",
-          "injury": "QUESTIONABLE",
+          "injury": "OUT",
           "slot": 20,
           "projected": 0.0
         },
@@ -587,7 +587,7 @@
           "name": "Giants D/ST",
           "injury": "ACTIVE",
           "slot": 16,
-          "projected": 7.06
+          "projected": 6.98
         },
         {
           "name": "Chig Okonkwo",
@@ -608,10 +608,10 @@
       "ppg": 121.0,
       "strength": 117.6,
       "projectedWins": 6.4,
-      "averageRank": 5.85,
-      "playoffPct": 60.7,
-      "byePct": 0.6,
-      "champPct": 5.7,
+      "averageRank": 5.88,
+      "playoffPct": 59.6,
+      "byePct": 0.4,
+      "champPct": 5.5,
       "roster": [
         {
           "name": "Jonathan Taylor",
@@ -723,7 +723,7 @@
       "strength": 116.3,
       "projectedWins": 6.2,
       "averageRank": 7.0,
-      "playoffPct": 34.4,
+      "playoffPct": 34.7,
       "byePct": 0.0,
       "champPct": 3.1,
       "roster": [
@@ -743,7 +743,7 @@
           "name": "DeVonta Smith",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 14.39
+          "projected": 14.4
         },
         {
           "name": "Lamar Jackson",
@@ -767,7 +767,7 @@
           "name": "Jared Goff",
           "injury": "ACTIVE",
           "slot": 0,
-          "projected": 16.94
+          "projected": 16.92
         },
         {
           "name": "Juwan Johnson",
@@ -777,7 +777,7 @@
         },
         {
           "name": "Parker Washington",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 4,
           "projected": 17.76
         },
@@ -803,7 +803,7 @@
           "name": "Texans D/ST",
           "injury": "ACTIVE",
           "slot": 16,
-          "projected": 7.26
+          "projected": 7.18
         },
         {
           "name": "Travis Etienne Jr.",
@@ -813,9 +813,9 @@
         },
         {
           "name": "Dallas Goedert",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 6,
-          "projected": 8.29
+          "projected": 8.3
         },
         {
           "name": "Lions D/ST",
@@ -836,16 +836,16 @@
       "ppg": 106.7,
       "strength": 112.9,
       "projectedWins": 6.3,
-      "averageRank": 7.14,
-      "playoffPct": 35.5,
+      "averageRank": 7.12,
+      "playoffPct": 35.8,
       "byePct": 0.0,
-      "champPct": 2.4,
+      "champPct": 2.3,
       "roster": [
         {
           "name": "CeeDee Lamb",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 20.35
+          "projected": 20.34
         },
         {
           "name": "A.J. Brown",
@@ -873,7 +873,7 @@
         },
         {
           "name": "Harold Fannin Jr.",
-          "injury": "QUESTIONABLE",
+          "injury": "ACTIVE",
           "slot": 6,
           "projected": 11.07
         },
@@ -911,7 +911,7 @@
           "name": "Mark Andrews",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 6.81
+          "projected": 6.82
         },
         {
           "name": "Tyler Shough",
@@ -956,10 +956,10 @@
       "ppg": 112.3,
       "strength": 115.8,
       "projectedWins": 5.6,
-      "averageRank": 7.69,
-      "playoffPct": 21.4,
+      "averageRank": 7.72,
+      "playoffPct": 20.9,
       "byePct": 0.0,
-      "champPct": 1.6,
+      "champPct": 1.8,
       "roster": [
         {
           "name": "Bijan Robinson",
@@ -987,7 +987,7 @@
         },
         {
           "name": "Colston Loveland",
-          "injury": "ACTIVE",
+          "injury": "QUESTIONABLE",
           "slot": 6,
           "projected": 10.48
         },
@@ -1001,7 +1001,7 @@
           "name": "Jaylen Warren",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 14.76
+          "projected": 14.77
         },
         {
           "name": "Steelers D/ST",
@@ -1025,7 +1025,7 @@
           "name": "Bears D/ST",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 3.7
+          "projected": 3.68
         },
         {
           "name": "Ka'imi Fairbairn",
@@ -1091,7 +1091,7 @@
           "name": "Zay Flowers",
           "injury": "ACTIVE",
           "slot": 4,
-          "projected": 14.62
+          "projected": 14.64
         },
         {
           "name": "Jaylen Waddle",
@@ -1107,7 +1107,7 @@
         },
         {
           "name": "Michael Pittman Jr.",
-          "injury": "INJURY_RESERVE",
+          "injury": "ACTIVE",
           "slot": 21,
           "projected": 4.71
         },
@@ -1145,7 +1145,7 @@
           "name": "Pat Freiermuth",
           "injury": "ACTIVE",
           "slot": 20,
-          "projected": 7.62
+          "projected": 7.63
         },
         {
           "name": "Aaron Rodgers",
